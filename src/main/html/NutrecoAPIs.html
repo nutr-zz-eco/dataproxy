@@ -415,7 +415,7 @@
 		return _.extend({operationId: operationId}, operations[operationId]);
 	};
 
-	_.module(["recurse", "clicks"], function (recurse, clicks) {
+	_.module(["recurse", "clicks"], function (_, recurse, clicks) {
 		clicks.execute(recurse.create({
 			$render: {
 				at: "#cards",
