@@ -1,0 +1,861 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"version": "v2",
+		"title": "Customer",
+		"description": "Customer"
+	},
+	"host": "api.nutreco.com",
+	"basePath": "/dev/v2",
+	"produces": [
+		"application/json",
+		"application/xml"
+	],
+	"schemes": [
+		"https"
+	],
+	"paths": {
+		"/customers/{customerId}/products": {
+			"get": {
+				"operationId": "/customers/{customerId}/products",
+				"description": "Get products",
+				"parameters": [
+					{
+						"$ref": "#/parameters/Authorization"
+					},
+					{
+						"$ref": "#/parameters/customerId"
+					},
+					{
+						"$ref": "#/parameters/whs"
+					},
+					{
+						"$ref": "#/parameters/lang"
+					},
+					{
+						"$ref": "#/parameters/assortment"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "products",
+						"schema": {
+							"$ref": "#/definitions/Products"
+						}
+					}
+				}
+			}
+		},
+		"/customers/{customerId}/products/assortment": {
+			"get": {
+				"operationId": "/customers/{customerId}/products/assortment",
+				"description": "Get products in assortment view",
+				"parameters": [
+					{
+						"$ref": "#/parameters/Authorization"
+					},
+					{
+						"$ref": "#/parameters/customerId"
+					},
+					{
+						"$ref": "#/parameters/whs"
+					},
+					{
+						"$ref": "#/parameters/lang"
+					},
+					{
+						"$ref": "#/parameters/assortment"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "products",
+						"schema": {
+							"$ref": "#/definitions/Assortment"
+						}
+					}
+				}
+			}
+		},
+		"/customers/{customerId}/products/{productId}/price": {
+			"get": {
+				"operationId": "/customers/{customerId}/products/{productId}/price",
+				"description": "Get product pricing",
+				"parameters": [
+					{
+						"$ref": "#/parameters/Authorization"
+					},
+					{
+						"$ref": "#/parameters/customerId"
+					},
+					{
+						"$ref": "#/parameters/productId"
+					},
+					{
+						"name": "qty",
+						"in": "query",
+						"required": false,
+						"type": "number",
+						"default": 1,
+						"format": "float"
+					},
+					{
+						"name": "uom",
+						"in": "query",
+						"required": false,
+						"type": "string",
+						"default": "KG",
+						"enum": [
+							"KG"
+						]
+					},
+					{
+						"name": "currency",
+						"in": "query",
+						"required": false,
+						"type": "string",
+						"default": "EUR",
+						"enum": [
+							"EUR"
+						]
+					},
+					{
+						"name": "date",
+						"in": "query",
+						"required": false,
+						"type": "string",
+						"default": "now",
+						"format": "date"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "products",
+						"schema": {
+							"$ref": "#/definitions/ProductPriceRes"
+						}
+					}
+				}
+			}
+		},
+		"/customers/{customerId}/orders": {
+			"get": {
+				"operationId": "/customers/{customerId}/orders",
+				"description": "Get orders",
+				"parameters": [
+					{
+						"$ref": "#/parameters/Authorization"
+					},
+					{
+						"$ref": "#/parameters/customerId"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "orders",
+						"schema": {
+							"$ref": "#/definitions/Order"
+						}
+					}
+				}
+			}
+		},
+		"/customers/{customerId}/loadingdates": {
+			"get": {
+				"operationId": "/customers/{customerId}/loadingdates",
+				"description": "Get loadingdates",
+				"parameters": [
+					{
+						"$ref": "#/parameters/Authorization"
+					},
+					{
+						"$ref": "#/parameters/customerId"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "loadingdates",
+						"schema": {
+							"$ref": "#/definitions/LoadingDates"
+						}
+					}
+				}
+			}
+		},
+		"/customers/{customerId}/leaguedata": {
+			"get": {
+				"operationId": "/customers/{customerId}/leaguedata",
+				"description": "Get leaguedata",
+				"parameters": [
+					{
+						"$ref": "#/parameters/Authorization"
+					},
+					{
+						"$ref": "#/parameters/customerId"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "leaguedata",
+						"schema": {
+							"$ref": "#/definitions/LeagueData"
+						}
+					}
+				}
+			}
+		},
+		"/customers/{customerId}/sitesettings": {
+			"get": {
+				"operationId": "/customers/{customerId}/sitesettings",
+				"description": "Get sitesettings",
+				"parameters": [
+					{
+						"$ref": "#/parameters/Authorization"
+					},
+					{
+						"$ref": "#/parameters/customerId"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "sitesettings",
+						"schema": {
+							"$ref": "#/definitions/SiteSettings"
+						}
+					}
+				}
+			}
+		},
+		"/customers/sitenames": {
+			"get": {
+				"operationId": "/customers/sitenames",
+				"description": "Get sitenames",
+				"parameters": [
+					{
+						"$ref": "#/parameters/Authorization"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "sitenames",
+						"schema": {
+							"$ref": "#/definitions/SiteNamesRes"
+						}
+					}
+				}
+			}
+		},
+		"/customers/swagger.json": {
+			"get": {
+				"operationId": "/customers/swagger.json",
+				"description": "this swagger documentation",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "object"
+						}
+					}
+				}
+			}
+		}
+	},
+	"definitions": {
+		"Article": {
+			"type": "object",
+			"properties": {
+				"Title": {
+					"type": "string"
+				},
+				"LevelId": {
+					"type": "string"
+				},
+				"Children": {
+					"type": "array",
+					"items": {
+						"properties": {
+							"Title": {
+								"type": "string"
+							},
+							"LevelId": {
+								"type": "string"
+							},
+							"Children": {
+								"type": "array",
+								"items": {
+									"properties": {
+										"Title": {
+											"type": "string"
+										},
+										"LevelId": {
+											"type": "string"
+										},
+										"Children": {
+											"items": {},
+											"type": "array",
+											"uniqueItems": false
+										},
+										"Products": {
+											"type": "array",
+											"items": {
+												"properties": {
+													"switno": {
+														"type": "string"
+													},
+													"mmitds": {
+														"type": "string"
+													},
+													"mbtomu": {
+														"type": "string"
+													},
+													"mmunms": {
+														"type": "string"
+													},
+													"BulkArticle": {
+														"type": "boolean"
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"Assortment": {
+			"type": "object",
+			"properties": {
+				"articleListChanged": {
+					"type": "boolean"
+				},
+				"hash": {
+					"type": "string"
+				},
+				"articleList": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"Title": {
+								"type": "string"
+							},
+							"LevelId": {
+								"type": "string"
+							},
+							"Children": {
+								"type": "array",
+								"items": {},
+								"uniqueItems": false
+							},
+							"Products": {
+								"type": "array",
+								"uniqueItems": false,
+								"items": {
+									"type": "object",
+									"properties": {
+										"oiitno": {
+											"type": "string"
+										},
+										"mmgrp1": {
+											"type": "string"
+										},
+										"mmgrp3": {
+											"type": "string"
+										},
+										"mmgrp4": {
+											"type": "string"
+										},
+										"mmitds": {
+											"type": "string"
+										},
+										"mbtomu": {
+											"type": "string"
+										},
+										"mmunms": {
+											"type": "string"
+										},
+										"mpvfdt": {
+											"type": "string"
+										},
+										"mplvdt": {
+											"type": "string"
+										},
+										"segrp1": {
+											"type": "string"
+										},
+										"segrp3": {
+											"type": "string"
+										},
+										"segrp4": {
+											"type": "string"
+										},
+										"mualun1": {
+											"type": "string"
+										},
+										"mualun2": {
+											"type": "string"
+										},
+										"mdfuds": {
+											"type": "string"
+										},
+										"package_type": {
+											"type": "string"
+										},
+										"package_size": {
+											"type": "string"
+										},
+										"BulkArticle": {
+											"type": "boolean"
+										},
+										"barcode": {
+											"type": "string"
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"ProductPriceRes": {
+			"type": "object",
+			"properties": {
+				"products": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"itemnumber": {
+								"type": "string"
+							},
+							"totalprice": {
+								"type": "number"
+							},
+							"currency": {
+								"type": "string"
+							},
+							"priceuom": {
+								"type": "number"
+							},
+							"qty": {
+								"type": "number"
+							},
+							"uom": {
+								"type": "string",
+								"enum": [
+									"KG"
+								]
+							},
+							"orderdate": {
+								"type": "string"
+							},
+							"ordertype": {
+								"type": "string"
+							}
+						}
+					}
+				}
+			}
+		},
+		"LeagueData": {
+			"type": "object",
+			"properties": {
+				"ID": {
+					"type": "string"
+				}
+			}
+		},
+		"LoadingDate": {
+			"type": "object",
+			"properties": {
+				"LoadingDate": {
+					"type": "string"
+				},
+				"Warehouse": {
+					"type": "string"
+				},
+				"WarehouseDesc": {
+					"type": "string"
+				}
+			}
+		},
+		"LoadingDates": {
+			"type": "object",
+			"properties": {
+				"Messages": {
+					"type": "array",
+					"items": {}
+				},
+				"LoadingDates": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/LoadingDate"
+					}
+				},
+				"Success": {
+					"type": "string"
+				}
+			}
+		},
+		"Order": {
+			"type": "object",
+			"properties": {
+				"Success": {
+					"type": "string"
+				},
+				"orders": {
+					"type": "array",
+					"items": {
+						"properties": {
+							"Date": {
+								"type": "string"
+							},
+							"HasOrder": {
+								"type": "boolean"
+							},
+							"Warehouse": {
+								"type": "string"
+							},
+							"WarehouseDesc": {
+								"type": "string"
+							},
+							"OrderHead": {
+								"$ref": "#/definitions/OrderHead"
+							}
+						}
+					}
+				}
+			}
+		},
+		"OrderHead": {
+			"type": "object",
+			"properties": {
+				"OrderNo": {
+					"type": "string"
+				},
+				"OrderDate": {
+					"type": "string"
+				},
+				"CustomerReference": {
+					"type": "string"
+				},
+				"CUOR": {
+					"type": "string"
+				},
+				"RequestedDeliveryDate": {
+					"type": "string"
+				},
+				"Status": {
+					"type": "string"
+				},
+				"NetWeight": {
+					"type": "string"
+				},
+				"MODL": {
+					"type": "string"
+				},
+				"WarehouseLocation": {
+					"type": "string"
+				},
+				"WarehouseID": {
+					"type": "string"
+				},
+				"CanTrack": {
+					"type": "boolean"
+				},
+				"ETATrack": {
+					"type": "string"
+				},
+				"CustomerName": {
+					"type": "string"
+				},
+				"CustNo": {
+					"type": "string"
+				},
+				"ETATrackId": {
+					"type": "integer"
+				},
+				"CommentID": {
+					"type": "string"
+				},
+				"CarrierInfo": {
+					"type": "string"
+				},
+				"Changeable": {
+					"type": "boolean"
+				},
+				"NotChangeableReason": {
+					"type": "string"
+				},
+				"Priority": {
+					"type": "string"
+				},
+				"Oref": {
+					"type": "string"
+				},
+				"AddressId": {
+					"type": "string"
+				},
+				"OrderLines": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/OrderLine"
+					}
+				},
+				"Comments": {
+					"type": "string"
+				},
+				"Diesel": {
+					"type": "string"
+				},
+				"Water": {
+					"type": "string"
+				}
+			}
+		},
+		"OrderLine": {
+			"type": "object",
+			"properties": {
+				"Lineno": {
+					"type": "string"
+				},
+				"Itemno": {
+					"type": "string"
+				},
+				"ItemDescription": {
+					"type": "string"
+				},
+				"RequestedDeliveryDate": {
+					"type": "string"
+				},
+				"DeliverySpecification": {
+					"type": "string"
+				},
+				"ConfirmedDeliveryDate": {
+					"type": "string"
+				},
+				"OrderedQuantity": {
+					"type": "string"
+				},
+				"Status": {
+					"type": "string"
+				},
+				"Changeable": {
+					"type": "boolean"
+				},
+				"NotChangeableReason": {
+					"type": "string"
+				},
+				"OrderNo": {
+					"type": "string"
+				}
+			}
+		},
+		"Products": {
+			"type": "object",
+			"properties": {
+				"articleListChanged": {
+					"type": "boolean"
+				},
+				"hash": {
+					"type": "string"
+				},
+				"articleList": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Article"
+					}
+				}
+			}
+		},
+		"SiteSettings": {
+			"type": "object",
+			"properties": {
+				"Success": {
+					"type": "boolean"
+				},
+				"CanDeliverToLocationWithoutPeoplePresent": {
+					"type": "boolean"
+				},
+				"CustIsInLeague": {
+					"type": "boolean"
+				},
+				"NeedsSMSLogin": {
+					"type": "boolean"
+				},
+				"SiteAccessList": {
+					"type": "array"
+				},
+				"CustomerName": {
+					"type": "string"
+				},
+				"SiteName": {
+					"type": "string"
+				},
+				"SiteStorageCapacity": {
+					"type": "number"
+				},
+				"SunriseTime": {
+					"type": "string"
+				},
+				"SunsetTime": {
+					"type": "string"
+				},
+				"DaylightHours": {
+					"type": "number"
+				},
+				"DaylightMinutes": {
+					"type": "number"
+				},
+				"OrderPhoneNr": {
+					"type": "string"
+				},
+				"HasGpsData": {
+					"type": "boolean"
+				},
+				"Gpslng": {
+					"type": "number"
+				},
+				"Gpslat": {
+					"type": "number"
+				},
+				"Gpsdate": {
+					"type": "string"
+				},
+				"HasLiceData": {
+					"type": "boolean"
+				},
+				"AvgAdultFemaleLice": {
+					"type": "number"
+				},
+				"AreaAdultFemaleLice": {
+					"type": "number"
+				},
+				"HasMobileAndStationaryLiceData": {
+					"type": "boolean"
+				},
+				"AvgMobileLice": {
+					"type": "number"
+				},
+				"AvgStationaryLice": {
+					"type": "number"
+				},
+				"Licedate": {
+					"type": "string"
+				},
+				"HasTempData": {
+					"type": "boolean"
+				},
+				"SeaTemperature": {
+					"type": "number"
+				},
+				"Tempdate": {
+					"type": "string"
+				},
+				"HasLatestDailyFeedingData": {
+					"type": "boolean"
+				},
+				"LatestDailyFeeding": {
+					"type": "number"
+				},
+				"LatestDailyFeedingDate": {
+					"type": "number"
+				},
+				"SiteCoordinateList": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"Sitename": {
+								"type": "number"
+							},
+							"Gpslng": {
+								"type": "number"
+							},
+							"Gpslat": {
+								"type": "number"
+							},
+							"AvgAdultFemaleLice": {
+								"type": "number"
+							},
+							"AvgMobileLice": {
+								"type": "number"
+							},
+							"AvgStationaryLice": {
+								"type": "number"
+							}
+						}
+					}
+				}
+			}
+		},
+		"SiteNamesRes": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"CustNo": {
+						"type": "string"
+					},
+					"Name": {
+						"type": "string"
+					}
+				}
+			}
+		}
+	},
+	"parameters": {
+		"Authorization": {
+			"name": "Authorization",
+			"in": "header",
+			"description": "Bearer token",
+			"required": true,
+			"type": "string",
+			"default": "Bearer AAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+			"pattern": "Bearer [A-Za-z0-9]{28}"
+		},
+		"customerId": {
+			"name": "customerId",
+			"in": "path",
+			"required": true,
+			"type": "string",
+			"default": "124748"
+		},
+		"lang": {
+			"name": "lang",
+			"in": "query",
+			"required": false,
+			"type": "string",
+			"default": "EN",
+			"enum": [
+				"EN",
+				"NL",
+				"ES",
+				"PT"
+			]
+		},
+		"productId": {
+			"name": "productId",
+			"in": "path",
+			"required": true,
+			"type": "string",
+			"default": "124681"
+		},
+		"whs": {
+			"name": "whs",
+			"in": "query",
+			"required": false,
+			"type": "string"
+		},
+		"assortment": {
+			"name": "assortment",
+			"in": "query",
+			"required": false,
+			"type": "string"
+		}
+	}
+}
