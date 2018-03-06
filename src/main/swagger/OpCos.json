@@ -33,6 +33,33 @@
 		"application/xml"
 	],
 	"paths": {
+		"/opcos/{opcoId}/customers/{customerId}/addresses": {
+			"get": {
+				"tags": [
+					"Customers"
+				],
+				"operationId": "get_customer_addresses_by_opco",
+				"parameters": [
+					{
+						"$ref": "#/parameters/Authorization"
+					},
+					{
+						"$ref": "#/parameters/token"
+					},
+					{
+						"$ref": "#/parameters/opcoId"
+					},
+					{
+						"$ref": "#/parameters/customerId"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK"
+					}
+				}
+			}
+		},
 		"/opcos/": {
 			"get": {
 				"tags": [
@@ -1364,6 +1391,15 @@
 			"type": "string",
 			"default": "Bearer AAAAAAAAAAAAAAAAAAAAAAAAAAAA",
 			"pattern": "Bearer [A-Za-z0-9]{28}"
+		},
+		"token": {
+			"name": "token",
+			"in": "header",
+			"description": "M3 token",
+			"required": true,
+			"type": "string",
+			"default": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+			"pattern": "[a-f0-9]{32}"
 		},
 		"apikey": {
 			"name": "apikey",
