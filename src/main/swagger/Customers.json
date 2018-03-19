@@ -1,9 +1,9 @@
 {
 	"swagger": "2.0",
 	"info": {
+		"title": "Customers",
 		"version": "v2",
-		"title": "Customer",
-		"description": "Customer"
+		"description": "Customers"
 	},
 	"host": "api.nutreco.com",
 	"basePath": "/dev/v2",
@@ -14,15 +14,52 @@
 	"schemes": [
 		"https"
 	],
+	"securityDefinitions": {
+		"oauth": {
+			"type": "oauth2",
+			"tokenUrl": "https://api.nutreco.com/dev/v2/login/token",
+			"flow": "password",
+			"scopes": {
+				"Customer": "InAppCustomer"
+			}
+		}
+	},
+	"security": [
+		{
+			"oauth": [
+				"Customer"
+			]
+		}
+	],
 	"paths": {
-		"/customers/{customerId}/products": {
+		"/customers/{customerId}/addresses": {
 			"get": {
-				"operationId": "/customers/{customerId}/products",
-				"description": "Get products",
+				"tags": [
+					"orders"
+				],
+				"operationId": "get_addresses_by_customerId",
 				"parameters": [
 					{
 						"$ref": "#/parameters/Authorization"
 					},
+					{
+						"$ref": "#/parameters/customerId"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK"
+					}
+				}
+			}
+		},
+		"/customers/{customerId}/products": {
+			"get": {
+				"tags": [
+					"orders"
+				],
+				"operationId": "get_products_by_customerId",
+				"parameters": [
 					{
 						"$ref": "#/parameters/customerId"
 					},
@@ -38,7 +75,7 @@
 				],
 				"responses": {
 					"200": {
-						"description": "products",
+						"description": "OK",
 						"schema": {
 							"$ref": "#/definitions/Products"
 						}
@@ -48,8 +85,10 @@
 		},
 		"/customers/{customerId}/products/assortment": {
 			"get": {
-				"operationId": "/customers/{customerId}/products/assortment",
-				"description": "Get products in assortment view",
+				"tags": [
+					"orders"
+				],
+				"operationId": "get_products_by_customerId_in_assortment_view",
 				"parameters": [
 					{
 						"$ref": "#/parameters/Authorization"
@@ -69,7 +108,7 @@
 				],
 				"responses": {
 					"200": {
-						"description": "products",
+						"description": "OK",
 						"schema": {
 							"$ref": "#/definitions/Assortment"
 						}
@@ -79,8 +118,10 @@
 		},
 		"/customers/{customerId}/products/{productId}/price": {
 			"get": {
-				"operationId": "/customers/{customerId}/products/{productId}/price",
-				"description": "Get product pricing",
+				"tags": [
+					"orders"
+				],
+				"operationId": "get_price_by_productId",
 				"parameters": [
 					{
 						"$ref": "#/parameters/Authorization"
@@ -130,7 +171,7 @@
 				],
 				"responses": {
 					"200": {
-						"description": "products",
+						"description": "OK",
 						"schema": {
 							"$ref": "#/definitions/ProductPriceRes"
 						}
@@ -140,8 +181,10 @@
 		},
 		"/customers/{customerId}/orders": {
 			"get": {
-				"operationId": "/customers/{customerId}/orders",
-				"description": "Get orders",
+				"tags": [
+					"orders"
+				],
+				"operationId": "get_orders_by_customerId",
 				"parameters": [
 					{
 						"$ref": "#/parameters/Authorization"
@@ -152,7 +195,7 @@
 				],
 				"responses": {
 					"200": {
-						"description": "orders",
+						"description": "OK",
 						"schema": {
 							"$ref": "#/definitions/Order"
 						}
@@ -160,10 +203,33 @@
 				}
 			}
 		},
-		"/customers/{customerId}/loadingdates": {
+		"/customers/sitenames": {
 			"get": {
-				"operationId": "/customers/{customerId}/loadingdates",
-				"description": "Get loadingdates",
+				"tags": [
+					"info"
+				],
+				"operationId": "get_sitenames",
+				"parameters": [
+					{
+						"$ref": "#/parameters/Authorization"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/SiteNamesRes"
+						}
+					}
+				}
+			}
+		},
+		"/customers/{customerId}/sitesettings": {
+			"get": {
+				"tags": [
+					"info"
+				],
+				"operationId": "get_sitesettings_by_customerId",
 				"parameters": [
 					{
 						"$ref": "#/parameters/Authorization"
@@ -174,7 +240,31 @@
 				],
 				"responses": {
 					"200": {
-						"description": "loadingdates",
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/SiteSettings"
+						}
+					}
+				}
+			}
+		},
+		"/customers/{customerId}/loadingdates": {
+			"get": {
+				"tags": [
+					"info"
+				],
+				"operationId": "get_Loadingdates_by_customerId",
+				"parameters": [
+					{
+						"$ref": "#/parameters/Authorization"
+					},
+					{
+						"$ref": "#/parameters/customerId"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
 						"schema": {
 							"$ref": "#/definitions/LoadingDates"
 						}
@@ -184,8 +274,10 @@
 		},
 		"/customers/{customerId}/leaguedata": {
 			"get": {
-				"operationId": "/customers/{customerId}/leaguedata",
-				"description": "Get leaguedata",
+				"tags": [
+					"info"
+				],
+				"operationId": "get_leagedata_by_customerId",
 				"parameters": [
 					{
 						"$ref": "#/parameters/Authorization"
@@ -196,7 +288,7 @@
 				],
 				"responses": {
 					"200": {
-						"description": "leaguedata",
+						"description": "OK",
 						"schema": {
 							"$ref": "#/definitions/LeagueData"
 						}
@@ -204,50 +296,12 @@
 				}
 			}
 		},
-		"/customers/{customerId}/sitesettings": {
-			"get": {
-				"operationId": "/customers/{customerId}/sitesettings",
-				"description": "Get sitesettings",
-				"parameters": [
-					{
-						"$ref": "#/parameters/Authorization"
-					},
-					{
-						"$ref": "#/parameters/customerId"
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "sitesettings",
-						"schema": {
-							"$ref": "#/definitions/SiteSettings"
-						}
-					}
-				}
-			}
-		},
-		"/customers/sitenames": {
-			"get": {
-				"operationId": "/customers/sitenames",
-				"description": "Get sitenames",
-				"parameters": [
-					{
-						"$ref": "#/parameters/Authorization"
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "sitenames",
-						"schema": {
-							"$ref": "#/definitions/SiteNamesRes"
-						}
-					}
-				}
-			}
-		},
 		"/customers/swagger.json": {
 			"get": {
-				"operationId": "/customers/swagger.json",
+				"tags": [
+					"swagger"
+				],
+				"operationId": "swagger_customers",
 				"description": "this swagger documentation",
 				"responses": {
 					"200": {
