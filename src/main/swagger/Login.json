@@ -1,0 +1,229 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"title": "Login",
+		"version": "v2"
+	},
+	"host": "api.nutreco.com",
+	"basePath": "/dev/v2",
+	"produces": [
+		"application/json",
+		"application/xml"
+	],
+	"schemes": [
+		"https"
+	],
+	"securityDefinitions": {
+		"basic": {
+			"type": "basic"
+		}
+	},
+	"paths": {
+		"/login/swagger.json": {
+			"get": {
+				"operationId": "/login/swagger.json"
+			}
+		},
+		"/login/token": {
+			"post": {
+				"security": [{
+					"basic": []
+				}],
+				"operationId": "/login/token",
+				"description": "Login based on OAuth 2.0, using the password granttype. System level authentication based on consumerKey and consumerSecret, issued to the developer upon App registration.",
+				"parameters": [
+					{
+						"in": "formData",
+						"name": "username",
+						"required": true,
+						"type": "string",
+						"default": "username"
+					},
+					{
+						"in": "formData",
+						"name": "password",
+						"required": true,
+						"type": "string",
+						"default": "password"
+					},
+					{
+						"in": "formData",
+						"name": "scope",
+						"required": true,
+						"type": "string",
+						"default": "InAppCustomer"
+					},
+					{
+						"in": "formData",
+						"name": "grant_type",
+						"description": "",
+						"required": true,
+						"type": "string",
+						"enum": [
+							"password",
+							"refresh_token"
+						],
+						"default": "password"
+					},
+					{
+						"in": "formData",
+						"name": "refresh_token",
+						"description": "token to be refreshed if grant_type=refresh_token",
+						"required": false,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Credentials",
+						"schema": {
+							"$ref": "#/definitions/Credentials"
+						}
+					},
+					"400": {
+						"description": "Bad Request"
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					}
+				}
+			}
+		}
+	},
+	"definitions": {
+		"Credentials": {
+			"type": "object",
+			"properties": {
+				"session": {
+					"$ref": "#/definitions/Session"
+				},
+				"profile": {
+					"$ref": "#/definitions/Profile"
+				},
+				"roles": {
+					"$ref": "#/definitions/Roles"
+				}
+			}
+		},
+		"Profile": {
+			"type": "object",
+			"properties": {
+				"login": {
+					"type": "string"
+				},
+				"mobilePhone": {
+					"type": "string"
+				},
+				"email": {
+					"type": "string"
+				},
+				"secondEmail": {
+					"type": "string"
+				},
+				"firstName": {
+					"type": "string"
+				},
+				"lastName": {
+					"type": "string"
+				},
+				"streetAddress": {
+					"type": "string"
+				},
+				"organization": {
+					"type": "string"
+				},
+				"arrayCustomerNr": {
+					"type": "string"
+				},
+				"primaryPhone": {
+					"type": "string"
+				},
+				"zipCode": {
+					"type": "string"
+				},
+				"city": {
+					"type": "string"
+				}
+			}
+		},
+		"Roles": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					}
+				}
+			}
+		},
+		"Session": {
+			"type": "object",
+			"properties": {
+				"refresh_token_expires_in": {
+					"type": "string"
+				},
+				"refresh_token_status": {
+					"type": "string"
+				},
+				"api_product_list": {
+					"type": "string"
+				},
+				"oktaCustomers": {
+					"type": "string"
+				},
+				"organization_name": {
+					"type": "string"
+				},
+				"developer.email": {
+					"type": "string"
+				},
+				"token_type": {
+					"type": "string"
+				},
+				"customerNumber": {
+					"type": "string"
+				},
+				"issued_at": {
+					"type": "string"
+				},
+				"client_id": {
+					"type": "string"
+				},
+				"customerName": {
+					"type": "string"
+				},
+				"access_token": {
+					"type": "string"
+				},
+				"refresh_token": {
+					"type": "string"
+				},
+				"application_name": {
+					"type": "string"
+				},
+				"scope": {
+					"type": "string"
+				},
+				"refresh_token_issued_at": {
+					"type": "string"
+				},
+				"expires_in": {
+					"type": "string"
+				},
+				"refresh_count": {
+					"type": "string"
+				},
+				"status": {
+					"type": "string"
+				}
+			}
+		}
+	}
+}
