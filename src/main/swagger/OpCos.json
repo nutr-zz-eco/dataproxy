@@ -232,6 +232,31 @@
 				}
 			}
 		},
+		"/opcos/{opcoId}/customers/{customerId}/pricelist": {
+			"get": {
+				"tags": [
+					"Customers"
+				],
+				"operationId": "get_pricelist",
+				"description": "[Customers] Get product pricelist for systems",
+				"parameters": [
+					{
+						"$ref": "#/parameters/opcoId"
+					},
+					{
+						"$ref": "#/parameters/customerId"
+					},
+				],
+				"responses": {
+					"200": {
+						"description": "product",
+						"schema": {
+							"$ref": "#/definitions/ProductPriceRes"
+						}
+					}
+				}
+			}
+		},
 		"/opcos/{opcoId}/customers/{customerId}/products/{productId}/price": {
 			"get": {
 				"tags": [
