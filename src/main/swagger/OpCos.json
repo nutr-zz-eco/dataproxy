@@ -2,21 +2,24 @@
 	"swagger": "2.0",
 	"info": {
 		"title": "OpCos",
-		"version": "v2",
-		"description": "OpCos"
+		"version": "v2"
 	},
 	"tags": [
 		{
 			"name": "OpCos",
-			"description": "Default"
+			"description": "Operation Companies"
 		},
 		{
 			"name": "Customers",
-			"description": "For systems"
+			"description": "Customer API for backend systems"
+		},
+		{
+			"name": "Products",
+			"description": "Products API for backend systems"
 		},
 		{
 			"name": "CustomerOrders",
-			"description": "For systems"
+			"description": "CustomerOrders API for backend systems"
 		},
 		{
 			"name": "Swagger",
@@ -53,38 +56,7 @@
 		}
 	],
 	"paths": {
-		"/opcos/{opcoId}/customers/{customerId}/addresses": {
-			"get": {
-				"tags": [
-					"Customers"
-				],
-				"security": [
-					{
-						"oauth": [
-							"Customer"
-						]
-					}
-				],
-				"operationId": "get_customer_addresses_by_opco",
-				"parameters": [
-					{
-						"$ref": "#/parameters/token"
-					},
-					{
-						"$ref": "#/parameters/opcoId"
-					},
-					{
-						"$ref": "#/parameters/customerId"
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "OK"
-					}
-				}
-			}
-		},
-		"/opcos/": {
+		"/opcos": {
 			"get": {
 				"tags": [
 					"OpCos"
@@ -96,14 +68,52 @@
 						]
 					}
 				],
-				"operationId": "/opcos/",
-				"description": "Get all opcos",
+				"operationId": "get_opcos",
 				"parameters": [],
 				"responses": {
 					"200": {
-						"description": "All opcos",
+						"description": "OK",
 						"schema": {
-							"$ref": "#/definitions/OpCosRes"
+							"type": "object",
+							"properties": {
+								"Success": {
+									"type": "boolean"
+								},
+								"OpCos": {
+									"type": "array",
+									"items": {
+										"$ref": "#/definitions/OperationCompany"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/opcos/{opcoId}": {
+			"get": {
+				"tags": [
+					"OpCos"
+				],
+				"security": [
+					{
+						"oauth": [
+							"Customer"
+						]
+					}
+				],
+				"operationId": "get_opco",
+				"parameters": [
+					{
+						"$ref": "#/parameters/opcoId"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/OperationCompany"
 						}
 					}
 				}
@@ -121,8 +131,7 @@
 						]
 					}
 				],
-				"operationId": "/opcos/{opcoId}/contactandabout",
-				"description": "Get opcos contact and about",
+				"operationId": "get_opco_contactandabout",
 				"parameters": [
 					{
 						"$ref": "#/parameters/opcoId"
@@ -130,7 +139,7 @@
 				],
 				"responses": {
 					"200": {
-						"description": "opcos contact and about",
+						"description": "OK",
 						"schema": {
 							"$ref": "#/definitions/OpCosContactAndAboutRes"
 						}
@@ -150,8 +159,7 @@
 						]
 					}
 				],
-				"operationId": "/opcos/{opcoId}/news",
-				"description": "Get opcos news",
+				"operationId": "get_opco_news",
 				"parameters": [
 					{
 						"$ref": "#/parameters/opcoId"
@@ -159,7 +167,38 @@
 				],
 				"responses": {
 					"200": {
-						"description": "opcos news html page"
+						"description": "OK"
+					}
+				}
+			}
+		},
+		"/opcos/{opcoId}/customers/{customerId}/addresses": {
+			"get": {
+				"tags": [
+					"Customers"
+				],
+				"security": [
+					{
+						"oauth": [
+							"Customer"
+						]
+					}
+				],
+				"operationId": "get_opco_customer_addresses",
+				"parameters": [
+					{
+						"$ref": "#/parameters/token"
+					},
+					{
+						"$ref": "#/parameters/opcoId"
+					},
+					{
+						"$ref": "#/parameters/customerId"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK"
 					}
 				}
 			}
@@ -167,22 +206,15 @@
 		"/opcos/{opcoId}/customers/{customerId}/products": {
 			"get": {
 				"tags": [
-					"Customers"
+					"Products"
 				],
-				"operationId": "/opcos/{opcoId}/customers/{customerId}/products",
-				"description": "[Customers] Get products for systems",
+				"operationId": "get_opco_products",
 				"parameters": [
 					{
 						"$ref": "#/parameters/opcoId"
 					},
 					{
 						"$ref": "#/parameters/customerId"
-					},
-					{
-						"$ref": "#/parameters/whs"
-					},
-					{
-						"$ref": "#/parameters/assortment"
 					},
 					{
 						"$ref": "#/parameters/lang"
@@ -198,25 +230,18 @@
 				}
 			}
 		},
-		"/opcos/{opcoId}/customers/{customerId}/products/assortment": {
+		"/opcos/{opcoId}/customers/{customerId}/products/pricelist": {
 			"get": {
 				"tags": [
-					"Customers"
+					"Products"
 				],
-				"operationId": "/opcos/{opcoId}/customers/{customerId}/products/assortment",
-				"description": "[Customers] Get products in assortment view for systems",
+				"operationId": "get_opco_pricelist",
 				"parameters": [
 					{
 						"$ref": "#/parameters/opcoId"
 					},
 					{
 						"$ref": "#/parameters/customerId"
-					},
-					{
-						"$ref": "#/parameters/whs"
-					},
-					{
-						"$ref": "#/parameters/assortment"
 					},
 					{
 						"$ref": "#/parameters/lang"
@@ -224,21 +249,20 @@
 				],
 				"responses": {
 					"200": {
-						"description": "productsRes",
+						"description": "product",
 						"schema": {
-							"$ref": "#/definitions/Assortment"
+							"$ref": "#/definitions/ProductPriceRes"
 						}
 					}
 				}
 			}
 		},
-		"/opcos/{opcoId}/customers/{customerId}/pricelist": {
+		"/opcos/{opcoId}/customers/{customerId}/products/{productId}": {
 			"get": {
 				"tags": [
-					"Customers"
+					"Products"
 				],
-				"operationId": "get_pricelist",
-				"description": "[Customers] Get product pricelist for systems",
+				"operationId": "get_opco_product",
 				"parameters": [
 					{
 						"$ref": "#/parameters/opcoId"
@@ -246,6 +270,12 @@
 					{
 						"$ref": "#/parameters/customerId"
 					},
+					{
+						"$ref": "#/parameters/productId"
+					},
+					{
+						"$ref": "#/parameters/lang"
+					}
 				],
 				"responses": {
 					"200": {
@@ -260,10 +290,9 @@
 		"/opcos/{opcoId}/customers/{customerId}/products/{productId}/price": {
 			"get": {
 				"tags": [
-					"Customers"
+					"Products"
 				],
-				"operationId": "/opcos/{opcoId}/customers/{customerId}/products/{productId}/price",
-				"description": "[Customers] Get product pricing for systems",
+				"operationId": "get_opco_price",
 				"parameters": [
 					{
 						"$ref": "#/parameters/opcoId"
@@ -324,7 +353,7 @@
 		"/opcos/{opcoId}/customers/{customerId}/orders": {
 			"get": {
 				"tags": [
-					"Customers"
+					"CustomerOrders"
 				],
 				"operationId": "/opcos/{opcoId}/customers/{customerId}/orders",
 				"description": "[Customers] Get orders for systems",
@@ -1234,55 +1263,44 @@
 				}
 			}
 		},
-		"OpCosRes": {
+		"OperationCompany": {
 			"type": "object",
 			"properties": {
-				"Succes": {
+				"CompanyConfigId": {
 					"type": "string"
 				},
-				"OpCos": {
-					"type": "array",
-					"items": {
-						"type": "object",
-						"properties": {
-							"CompanyConfigId": {
-								"type": "string"
-							},
-							"CompanyName": {
-								"type": "string"
-							},
-							"App": {
-								"type": "string"
-							},
-							"Installation": {
-								"type": "string"
-							},
-							"Environment": {
-								"type": "string"
-							},
-							"Cono": {
-								"type": "string"
-							},
-							"Divi": {
-								"type": "string"
-							},
-							"Faci": {
-								"type": "string"
-							},
-							"Whlo": {
-								"type": "string"
-							},
-							"Ortp": {
-								"type": "string"
-							},
-							"Rss": {
-								"type": "string"
-							},
-							"ComplaintMailReceivers": {
-								"type": "string"
-							}
-						}
-					}
+				"CompanyName": {
+					"type": "string"
+				},
+				"App": {
+					"type": "string"
+				},
+				"Installation": {
+					"type": "string"
+				},
+				"Environment": {
+					"type": "string"
+				},
+				"Cono": {
+					"type": "string"
+				},
+				"Divi": {
+					"type": "string"
+				},
+				"Faci": {
+					"type": "string"
+				},
+				"Whlo": {
+					"type": "string"
+				},
+				"Ortp": {
+					"type": "string"
+				},
+				"Rss": {
+					"type": "string"
+				},
+				"ComplaintMailReceivers": {
+					"type": "string"
 				}
 			}
 		},
