@@ -1,8 +1,8 @@
 {
 	"swagger": "2.0",
 	"info": {
-		"version": "v2",
 		"title": "OpCos",
+		"version": "v2",
 		"description": "OpCos"
 	},
 	"tags": [
@@ -32,17 +32,41 @@
 		"application/json",
 		"application/xml"
 	],
+	"securityDefinitions": {
+		"apikey": {
+			"type": "apiKey",
+			"name": "apikey",
+			"in": "header"
+		},
+		"oauth": {
+			"type": "oauth2",
+			"tokenUrl": "https://api.nutreco.com/dev/v2/login/token",
+			"flow": "password",
+			"scopes": {
+				"Customer": "InAppCustomer"
+			}
+		}
+	},
+	"security": [
+		{
+			"apikey": []
+		}
+	],
 	"paths": {
 		"/opcos/{opcoId}/customers/{customerId}/addresses": {
 			"get": {
 				"tags": [
 					"Customers"
 				],
+				"security": [
+					{
+						"oauth": [
+							"Customer"
+						]
+					}
+				],
 				"operationId": "get_customer_addresses_by_opco",
 				"parameters": [
-					{
-						"$ref": "#/parameters/Authorization"
-					},
 					{
 						"$ref": "#/parameters/token"
 					},
@@ -65,13 +89,16 @@
 				"tags": [
 					"OpCos"
 				],
-				"operationId": "/opcos/",
-				"description": "Get all opcos",
-				"parameters": [
+				"security": [
 					{
-						"$ref": "#/parameters/Authorization"
+						"oauth": [
+							"Customer"
+						]
 					}
 				],
+				"operationId": "/opcos/",
+				"description": "Get all opcos",
+				"parameters": [],
 				"responses": {
 					"200": {
 						"description": "All opcos",
@@ -87,12 +114,16 @@
 				"tags": [
 					"OpCos"
 				],
+				"security": [
+					{
+						"oauth": [
+							"Customer"
+						]
+					}
+				],
 				"operationId": "/opcos/{opcoId}/contactandabout",
 				"description": "Get opcos contact and about",
 				"parameters": [
-					{
-						"$ref": "#/parameters/Authorization"
-					},
 					{
 						"$ref": "#/parameters/opcoId"
 					}
@@ -112,12 +143,16 @@
 				"tags": [
 					"OpCos"
 				],
+				"security": [
+					{
+						"oauth": [
+							"Customer"
+						]
+					}
+				],
 				"operationId": "/opcos/{opcoId}/news",
 				"description": "Get opcos news",
 				"parameters": [
-					{
-						"$ref": "#/parameters/Authorization"
-					},
 					{
 						"$ref": "#/parameters/opcoId"
 					}
@@ -137,9 +172,6 @@
 				"operationId": "/opcos/{opcoId}/customers/{customerId}/products",
 				"description": "[Customers] Get products for systems",
 				"parameters": [
-					{
-						"$ref": "#/parameters/apikey"
-					},
 					{
 						"$ref": "#/parameters/opcoId"
 					},
@@ -175,9 +207,6 @@
 				"description": "[Customers] Get products in assortment view for systems",
 				"parameters": [
 					{
-						"$ref": "#/parameters/apikey"
-					},
-					{
 						"$ref": "#/parameters/opcoId"
 					},
 					{
@@ -211,9 +240,6 @@
 				"operationId": "/opcos/{opcoId}/customers/{customerId}/products/{productId}/price",
 				"description": "[Customers] Get product pricing for systems",
 				"parameters": [
-					{
-						"$ref": "#/parameters/apikey"
-					},
 					{
 						"$ref": "#/parameters/opcoId"
 					},
@@ -279,9 +305,6 @@
 				"description": "[Customers] Get orders for systems",
 				"parameters": [
 					{
-						"$ref": "#/parameters/apikey"
-					},
-					{
 						"$ref": "#/parameters/opcoId"
 					},
 					{
@@ -306,9 +329,6 @@
 				"operationId": "/opcos/{opcoId}/customers/{customerId}/sitesettings",
 				"description": "[Customers] Get sitesettings for systems",
 				"parameters": [
-					{
-						"$ref": "#/parameters/apikey"
-					},
 					{
 						"$ref": "#/parameters/opcoId"
 					},
@@ -335,9 +355,6 @@
 				"description": "[Customers] Get sitenames for systems",
 				"parameters": [
 					{
-						"$ref": "#/parameters/apikey"
-					},
-					{
 						"$ref": "#/parameters/opcoId"
 					},
 					{
@@ -362,9 +379,6 @@
 				"operationId": "/opcos/{opcoId}/customerorders (POST)",
 				"description": "Create order for systems",
 				"parameters": [
-					{
-						"$ref": "#/parameters/apikey"
-					},
 					{
 						"$ref": "#/parameters/opcoId"
 					},
@@ -396,9 +410,6 @@
 				"description": "Get order lines for systems",
 				"parameters": [
 					{
-						"$ref": "#/parameters/apikey"
-					},
-					{
 						"$ref": "#/parameters/opcoId"
 					},
 					{
@@ -421,9 +432,6 @@
 				"operationId": "/opcos/{opcoId}/customerorders/{orderId} (PUT)",
 				"description": "Update order for systems",
 				"parameters": [
-					{
-						"$ref": "#/parameters/apikey"
-					},
 					{
 						"$ref": "#/parameters/opcoId"
 					},
@@ -456,9 +464,6 @@
 				"description": "Delete order for systems",
 				"parameters": [
 					{
-						"$ref": "#/parameters/apikey"
-					},
-					{
 						"$ref": "#/parameters/opcoId"
 					},
 					{
@@ -483,9 +488,6 @@
 				"operationId": "/opcos/{opcoId}/customerorders/{orderId}/deliverydate (PUT)",
 				"description": "Update order deliverydate for systems",
 				"parameters": [
-					{
-						"$ref": "#/parameters/apikey"
-					},
 					{
 						"$ref": "#/parameters/opcoId"
 					},
@@ -516,6 +518,7 @@
 				"tags": [
 					"Swagger"
 				],
+				"security": [],
 				"operationId": "/customers/swagger.json",
 				"description": "this swaggers documentation",
 				"responses": {

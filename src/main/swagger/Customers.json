@@ -40,9 +40,6 @@
 				"operationId": "get_addresses_by_customerId",
 				"parameters": [
 					{
-						"$ref": "#/parameters/Authorization"
-					},
-					{
 						"$ref": "#/parameters/customerId"
 					}
 				],
@@ -91,9 +88,6 @@
 				"operationId": "get_products_by_customerId_in_assortment_view",
 				"parameters": [
 					{
-						"$ref": "#/parameters/Authorization"
-					},
-					{
 						"$ref": "#/parameters/customerId"
 					},
 					{
@@ -123,9 +117,6 @@
 				],
 				"operationId": "get_price_by_productId",
 				"parameters": [
-					{
-						"$ref": "#/parameters/Authorization"
-					},
 					{
 						"$ref": "#/parameters/customerId"
 					},
@@ -187,9 +178,6 @@
 				"operationId": "get_orders_by_customerId",
 				"parameters": [
 					{
-						"$ref": "#/parameters/Authorization"
-					},
-					{
 						"$ref": "#/parameters/customerId"
 					}
 				],
@@ -209,11 +197,7 @@
 					"info"
 				],
 				"operationId": "get_sitenames",
-				"parameters": [
-					{
-						"$ref": "#/parameters/Authorization"
-					}
-				],
+				"parameters": [],
 				"responses": {
 					"200": {
 						"description": "OK",
@@ -231,9 +215,6 @@
 				],
 				"operationId": "get_sitesettings_by_customerId",
 				"parameters": [
-					{
-						"$ref": "#/parameters/Authorization"
-					},
 					{
 						"$ref": "#/parameters/customerId"
 					}
@@ -256,9 +237,6 @@
 				"operationId": "get_Loadingdates_by_customerId",
 				"parameters": [
 					{
-						"$ref": "#/parameters/Authorization"
-					},
-					{
 						"$ref": "#/parameters/customerId"
 					}
 				],
@@ -280,9 +258,6 @@
 				"operationId": "get_leagedata_by_customerId",
 				"parameters": [
 					{
-						"$ref": "#/parameters/Authorization"
-					},
-					{
 						"$ref": "#/parameters/customerId"
 					}
 				],
@@ -301,6 +276,7 @@
 				"tags": [
 					"swagger"
 				],
+				"security": [],
 				"operationId": "swagger_customers",
 				"description": "this swagger documentation",
 				"responses": {
