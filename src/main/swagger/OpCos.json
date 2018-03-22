@@ -222,9 +222,23 @@
 				],
 				"responses": {
 					"200": {
-						"description": "products",
+						"description": "OK",
 						"schema": {
-							"$ref": "#/definitions/ProductsRes"
+							"type": "object",
+							"properties": {
+								"articleListChanged": {
+									"type": "boolean"
+								},
+								"hash": {
+									"type": "string"
+								},
+								"articleList": {
+									"type": "array",
+									"items": {
+										"$ref": "#/definitions/Article"
+									}
+								}
+							}
 						}
 					}
 				}
@@ -249,9 +263,17 @@
 				],
 				"responses": {
 					"200": {
-						"description": "product",
+						"description": "OK",
 						"schema": {
-							"$ref": "#/definitions/ProductPriceRes"
+							"type": "object",
+							"properties": {
+								"Products": {
+									"type": "array",
+									"items": {
+										"$ref": "#/definitions/Product"
+									}
+								}
+							}
 						}
 					}
 				}
@@ -279,9 +301,9 @@
 				],
 				"responses": {
 					"200": {
-						"description": "product",
+						"description": "OK",
 						"schema": {
-							"$ref": "#/definitions/ProductPriceRes"
+							"$ref": "#/definitions/Product"
 						}
 					}
 				}
@@ -344,7 +366,7 @@
 					"200": {
 						"description": "product",
 						"schema": {
-							"$ref": "#/definitions/ProductPriceRes"
+							"$ref": "#/definitions/Product"
 						}
 					}
 				}
@@ -610,102 +632,6 @@
 				}
 			}
 		},
-		"Assortment": {
-			"type": "object",
-			"properties": {
-				"articleListChanged": {
-					"type": "boolean"
-				},
-				"hash": {
-					"type": "string"
-				},
-				"articleList": {
-					"type": "array",
-					"items": {
-						"type": "object",
-						"properties": {
-							"Title": {
-								"type": "string"
-							},
-							"LevelId": {
-								"type": "string"
-							},
-							"Children": {
-								"type": "array",
-								"items": {},
-								"uniqueItems": false
-							},
-							"Products": {
-								"type": "array",
-								"uniqueItems": false,
-								"items": {
-									"type": "object",
-									"properties": {
-										"oiitno": {
-											"type": "string"
-										},
-										"mmgrp1": {
-											"type": "string"
-										},
-										"mmgrp3": {
-											"type": "string"
-										},
-										"mmgrp4": {
-											"type": "string"
-										},
-										"mmitds": {
-											"type": "string"
-										},
-										"mbtomu": {
-											"type": "string"
-										},
-										"mmunms": {
-											"type": "string"
-										},
-										"mpvfdt": {
-											"type": "string"
-										},
-										"mplvdt": {
-											"type": "string"
-										},
-										"segrp1": {
-											"type": "string"
-										},
-										"segrp3": {
-											"type": "string"
-										},
-										"segrp4": {
-											"type": "string"
-										},
-										"mualun1": {
-											"type": "string"
-										},
-										"mualun2": {
-											"type": "string"
-										},
-										"mdfuds": {
-											"type": "string"
-										},
-										"package_type": {
-											"type": "string"
-										},
-										"package_size": {
-											"type": "string"
-										},
-										"BulkArticle": {
-											"type": "boolean"
-										},
-										"barcode": {
-											"type": "string"
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		},
 		"OrderRes": {
 			"type": "object",
 			"properties": {
@@ -864,89 +790,60 @@
 		"Product": {
 			"type": "object",
 			"properties": {
+				"productId": {
+					"type": "string"
+				},
 				"itemnumber": {
-					"type": "string"
+					"type": "string",
+					"description": "alias for productId"
 				},
-				"totalprice": {
-					"type": "number"
+				"switno": {
+					"type": "string",
+					"description": "alias for productId"
 				},
-				"currency": {
-					"type": "string"
-				},
-				"priceuom": {
-					"type": "number"
+				"mmitds": {
+					"type": "string",
+					"description": "product description"
 				},
 				"qty": {
-					"type": "number"
+					"type": "number",
+					"description": "quantity"
+				},
+				"mbtomu": {
+					"type": "string",
+					"description": "alias for qty"
 				},
 				"uom": {
 					"type": "string",
+					"description": "unit of measure",
 					"enum": [
 						"KG"
 					]
 				},
-				"orderdate": {
+				"mmunms": {
+					"type": "string",
+					"description": "alias for uom",
+				},
+				"currency": {
 					"type": "string"
 				},
-				"ordertype": {
-					"type": "string"
-				}
-			}
-		},
-		"ProductPriceRes": {
-			"type": "object",
-			"properties": {
-				"products": {
-					"type": "array",
-					"items": {
-						"type": "object",
-						"properties": {
-							"itemnumber": {
-								"type": "string"
-							},
-							"totalprice": {
-								"type": "number"
-							},
-							"currency": {
-								"type": "string"
-							},
-							"priceuom": {
-								"type": "number"
-							},
-							"qty": {
-								"type": "number"
-							},
-							"uom": {
-								"type": "string",
-								"enum": [
-									"KG"
-								]
-							},
-							"orderdate": {
-								"type": "string"
-							},
-							"ordertype": {
-								"type": "string"
-							}
-						}
-					}
-				}
-			}
-		},
-		"ProductsRes": {
-			"type": "object",
-			"properties": {
-				"articleListChanged": {
-					"type": "boolean"
+				"salesPrice": {
+					"type": "number"
 				},
-				"hash": {
+				"totalPrice": {
+					"type": "number"
+				},
+				"startDate": {
 					"type": "string"
 				},
-				"articleList": {
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/Article"
-					}
+				"endDate": {
+					"type": "string"
+				},
+				"orderDate": {
+					"type": "string"
+				},
+				"orderType": {
+					"type": "string"
 				}
 			}
 		},
