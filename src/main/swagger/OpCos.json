@@ -252,10 +252,18 @@
 				"operationId": "get_opco_pricelist",
 				"parameters": [
 					{
-						"$ref": "#/parameters/opcoId"
+						"name": "opcoId",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"default": "12"
 					},
 					{
-						"$ref": "#/parameters/customerId"
+						"name": "customerId",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"default": "0"
 					},
 					{
 						"$ref": "#/parameters/lang"
