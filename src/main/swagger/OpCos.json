@@ -172,37 +172,6 @@
 				}
 			}
 		},
-		"/opcos/{opcoId}/customers/{customerId}/addresses": {
-			"get": {
-				"tags": [
-					"Customers"
-				],
-				"security": [
-					{
-						"oauth": [
-							"Customer"
-						]
-					}
-				],
-				"operationId": "get_opco_customer_addresses",
-				"parameters": [
-					{
-						"$ref": "#/parameters/token"
-					},
-					{
-						"$ref": "#/parameters/opcoId"
-					},
-					{
-						"$ref": "#/parameters/customerId"
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "OK"
-					}
-				}
-			}
-		},
 		"/opcos/{opcoId}/customers/{customerId}/products": {
 			"get": {
 				"tags": [
@@ -376,6 +345,37 @@
 						"schema": {
 							"$ref": "#/definitions/Product"
 						}
+					}
+				}
+			}
+		},
+		"/opcos/{opcoId}/customers/{customerId}/addresses": {
+			"get": {
+				"tags": [
+					"Customers"
+				],
+				"security": [
+					{
+						"oauth": [
+							"Customer"
+						]
+					}
+				],
+				"operationId": "get_opco_customer_addresses",
+				"parameters": [
+					{
+						"$ref": "#/parameters/token"
+					},
+					{
+						"$ref": "#/parameters/opcoId"
+					},
+					{
+						"$ref": "#/parameters/customerId"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK"
 					}
 				}
 			}
