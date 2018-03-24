@@ -329,7 +329,8 @@
 						"type": "string",
 						"default": "KG",
 						"enum": [
-							"KG"
+							"KG",
+							"MT"
 						]
 					},
 					{
