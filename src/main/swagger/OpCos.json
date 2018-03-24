@@ -294,13 +294,25 @@
 				"operationId": "get_opco_price",
 				"parameters": [
 					{
-						"$ref": "#/parameters/opcoId"
+						"name": "opcoId",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"default": "12"
 					},
 					{
-						"$ref": "#/parameters/customerId"
+						"name": "customerId",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"default": "149516"
 					},
 					{
-						"$ref": "#/parameters/productId"
+						"name": "productId",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"default": "11703805"
 					},
 					{
 						"name": "qty",
@@ -327,7 +339,8 @@
 						"type": "string",
 						"default": "EUR",
 						"enum": [
-							"EUR"
+							"EUR",
+							"CAD"
 						]
 					},
 					{
