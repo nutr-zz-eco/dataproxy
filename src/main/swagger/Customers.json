@@ -140,7 +140,7 @@
 					"200": {
 						"description": "OK",
 						"schema": {
-							"$ref": "#/definitions/Assortment"
+							"$ref": "#/definitions/Products"
 						}
 					}
 				}
@@ -327,71 +327,7 @@
 		}
 	},
 	"definitions": {
-		"Article": {
-			"type": "object",
-			"properties": {
-				"Title": {
-					"type": "string"
-				},
-				"LevelId": {
-					"type": "string"
-				},
-				"Children": {
-					"type": "array",
-					"items": {
-						"properties": {
-							"Title": {
-								"type": "string"
-							},
-							"LevelId": {
-								"type": "string"
-							},
-							"Children": {
-								"type": "array",
-								"items": {
-									"properties": {
-										"Title": {
-											"type": "string"
-										},
-										"LevelId": {
-											"type": "string"
-										},
-										"Children": {
-											"items": {},
-											"type": "array",
-											"uniqueItems": false
-										},
-										"Products": {
-											"type": "array",
-											"items": {
-												"properties": {
-													"switno": {
-														"type": "string"
-													},
-													"mmitds": {
-														"type": "string"
-													},
-													"mbtomu": {
-														"type": "string"
-													},
-													"mmunms": {
-														"type": "string"
-													},
-													"BulkArticle": {
-														"type": "boolean"
-													}
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		},
-		"Assortment": {
+		"Products": {
 			"type": "object",
 			"properties": {
 				"articleListChanged": {
@@ -403,127 +339,92 @@
 				"articleList": {
 					"type": "array",
 					"items": {
-						"type": "object",
-						"properties": {
-							"Title": {
-								"type": "string"
-							},
-							"LevelId": {
-								"type": "string"
-							},
-							"Children": {
-								"type": "array",
-								"items": {},
-								"uniqueItems": false
-							},
-							"Products": {
-								"type": "array",
-								"uniqueItems": false,
-								"items": {
-									"type": "object",
-									"properties": {
-										"oiitno": {
-											"type": "string"
-										},
-										"mmgrp1": {
-											"type": "string"
-										},
-										"mmgrp3": {
-											"type": "string"
-										},
-										"mmgrp4": {
-											"type": "string"
-										},
-										"mmitds": {
-											"type": "string"
-										},
-										"mbtomu": {
-											"type": "string"
-										},
-										"mmunms": {
-											"type": "string"
-										},
-										"mpvfdt": {
-											"type": "string"
-										},
-										"mplvdt": {
-											"type": "string"
-										},
-										"segrp1": {
-											"type": "string"
-										},
-										"segrp3": {
-											"type": "string"
-										},
-										"segrp4": {
-											"type": "string"
-										},
-										"mualun1": {
-											"type": "string"
-										},
-										"mualun2": {
-											"type": "string"
-										},
-										"mdfuds": {
-											"type": "string"
-										},
-										"package_type": {
-											"type": "string"
-										},
-										"package_size": {
-											"type": "string"
-										},
-										"BulkArticle": {
-											"type": "boolean"
-										},
-										"barcode": {
-											"type": "string"
-										}
-									}
-								}
-							}
-						}
+						"$ref": "#/definitions/Article"
 					}
 				}
 			}
 		},
-		"ProductPriceRes": {
+		"Article": {
 			"type": "object",
+			"required": ["Title", "LevelId", "Children"],
 			"properties": {
-				"products": {
+				"Title": {
+					"type": "string"
+				},
+				"LevelId": {
+					"type": "string"
+				},
+				"Children": {
 					"type": "array",
 					"items": {
-						"type": "object",
-						"properties": {
-							"itemnumber": {
-								"type": "string"
-							},
-							"totalprice": {
-								"type": "number"
-							},
-							"currency": {
-								"type": "string"
-							},
-							"priceuom": {
-								"type": "number"
-							},
-							"qty": {
-								"type": "number"
-							},
-							"uom": {
-								"type": "string",
-								"enum": [
-									"KG"
-								]
-							},
-							"orderdate": {
-								"type": "string"
-							},
-							"ordertype": {
-								"type": "string"
-							}
-						}
+						"$ref": "#/definitions/Article"
 					}
+				},
+				"Products": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Product"
+					}
+				}
+			}
+		},
+		"Product": {
+			"type": "object",
+			"properties": {
+				"productId": {
+					"type": "string"
+				},
+				"itemnumber": {
+					"type": "string",
+					"description": "alias for productId"
+				},
+				"switno": {
+					"type": "string",
+					"description": "alias for productId"
+				},
+				"mmitds": {
+					"type": "string",
+					"description": "product description"
+				},
+				"qty": {
+					"type": "number",
+					"description": "quantity"
+				},
+				"mbtomu": {
+					"type": "string",
+					"description": "alias for qty"
+				},
+				"uom": {
+					"type": "string",
+					"description": "unit of measure",
+					"enum": [
+						"KG"
+					]
+				},
+				"mmunms": {
+					"type": "string",
+					"description": "alias for uom"
+				},
+				"currency": {
+					"type": "string"
+				},
+				"salesPrice": {
+					"type": "number"
+				},
+				"totalPrice": {
+					"type": "number"
+				},
+				"startDate": {
+					"type": "string"
+				},
+				"endDate": {
+					"type": "string"
+				},
+				"orderDate": {
+					"type": "string"
+				},
+				"orderType": {
+					"type": "string"
 				}
 			}
 		},
@@ -718,23 +619,6 @@
 				},
 				"OrderNo": {
 					"type": "string"
-				}
-			}
-		},
-		"Products": {
-			"type": "object",
-			"properties": {
-				"articleListChanged": {
-					"type": "boolean"
-				},
-				"hash": {
-					"type": "string"
-				},
-				"articleList": {
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/Article"
-					}
 				}
 			}
 		},
