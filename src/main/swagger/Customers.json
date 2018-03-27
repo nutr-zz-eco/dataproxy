@@ -80,6 +80,42 @@
 				}
 			}
 		},
+		"/customers/{customerId}/products/pricelist": {
+			"get": {
+				"tags": [
+					"Products"
+				],
+				"operationId": "get_pricelist",
+				"parameters": [
+					{
+						"name": "customerId",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"default": "149516"
+					},
+					{
+						"$ref": "#/parameters/lang"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "object",
+							"properties": {
+								"Products": {
+									"type": "array",
+									"items": {
+										"$ref": "#/definitions/Product"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
 		"/customers/{customerId}/products/assortment": {
 			"get": {
 				"tags": [
