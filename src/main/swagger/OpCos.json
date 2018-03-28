@@ -50,14 +50,10 @@
 			}
 		}
 	},
-	"security": [
-		{
-			"apikey": []
-		}
-	],
 	"paths": {
 		"/opcos": {
 			"get": {
+				"operationId": "get_opcos",
 				"tags": [
 					"OpCos"
 				],
@@ -68,7 +64,6 @@
 						]
 					}
 				],
-				"operationId": "get_opcos",
 				"parameters": [],
 				"responses": {
 					"200": {
@@ -93,6 +88,7 @@
 		},
 		"/opcos/{opcoId}": {
 			"get": {
+				"operationId": "get_opco",
 				"tags": [
 					"OpCos"
 				],
@@ -103,7 +99,6 @@
 						]
 					}
 				],
-				"operationId": "get_opco",
 				"parameters": [
 					{
 						"$ref": "#/parameters/opcoId"
@@ -121,6 +116,7 @@
 		},
 		"/opcos/{opcoId}/contactandabout": {
 			"get": {
+				"operationId": "get_opco_contactandabout",
 				"tags": [
 					"OpCos"
 				],
@@ -131,7 +127,6 @@
 						]
 					}
 				],
-				"operationId": "get_opco_contactandabout",
 				"parameters": [
 					{
 						"$ref": "#/parameters/opcoId"
@@ -149,6 +144,7 @@
 		},
 		"/opcos/{opcoId}/news": {
 			"get": {
+				"operationId": "get_opco_news",
 				"tags": [
 					"OpCos"
 				],
@@ -159,7 +155,6 @@
 						]
 					}
 				],
-				"operationId": "get_opco_news",
 				"parameters": [
 					{
 						"$ref": "#/parameters/opcoId"
@@ -174,10 +169,15 @@
 		},
 		"/opcos/{opcoId}/customers/{customerId}/products": {
 			"get": {
+				"operationId": "get_opco_products",
 				"tags": [
 					"Products"
 				],
-				"operationId": "get_opco_products",
+				"security": [
+					{
+						"apikey": []
+					}
+				],
 				"parameters": [
 					{
 						"$ref": "#/parameters/opcoId"
@@ -215,10 +215,15 @@
 		},
 		"/opcos/{opcoId}/customers/{customerId}/products/pricelist": {
 			"get": {
+				"operationId": "get_opco_pricelist",
 				"tags": [
 					"Products"
 				],
-				"operationId": "get_opco_pricelist",
+				"security": [
+					{
+						"apikey": []
+					}
+				],
 				"parameters": [
 					{
 						"name": "opcoId",
@@ -258,10 +263,15 @@
 		},
 		"/opcos/{opcoId}/customers/{customerId}/products/{productId}": {
 			"get": {
+				"operationId": "get_opco_product",
 				"tags": [
 					"Products"
 				],
-				"operationId": "get_opco_product",
+				"security": [
+					{
+						"apikey": []
+					}
+				],
 				"parameters": [
 					{
 						"$ref": "#/parameters/opcoId"
@@ -288,10 +298,15 @@
 		},
 		"/opcos/{opcoId}/customers/{customerId}/products/{productId}/price": {
 			"get": {
+				"operationId": "get_opco_price",
 				"tags": [
 					"Products"
 				],
-				"operationId": "get_opco_price",
+				"security": [
+					{
+						"apikey": []
+					}
+				],
 				"parameters": [
 					{
 						"name": "opcoId",
@@ -396,10 +411,15 @@
 		},
 		"/opcos/{opcoId}/customers/{customerId}/orders": {
 			"get": {
+				"operationId": "/opcos/{opcoId}/customers/{customerId}/orders",
 				"tags": [
 					"CustomerOrders"
 				],
-				"operationId": "/opcos/{opcoId}/customers/{customerId}/orders",
+				"security": [
+					{
+						"apikey": []
+					}
+				],
 				"description": "[Customers] Get orders for systems",
 				"parameters": [
 					{
@@ -421,11 +441,15 @@
 		},
 		"/opcos/{opcoId}/customers/{customerId}/sitesettings": {
 			"get": {
+				"operationId": "/opcos/{opcoId}/customers/{customerId}/sitesettings",
 				"tags": [
 					"Customers"
 				],
-				"operationId": "/opcos/{opcoId}/customers/{customerId}/sitesettings",
-				"description": "[Customers] Get sitesettings for systems",
+				"security": [
+					{
+						"apikey": []
+					}
+				],
 				"parameters": [
 					{
 						"$ref": "#/parameters/opcoId"
@@ -446,11 +470,15 @@
 		},
 		"/opcos/{opcoId}/customers/{customerId}/sitenames": {
 			"get": {
+				"operationId": "/opcos/{opcoId}/customers/{customerId}/sitenames",
 				"tags": [
 					"Customers"
 				],
-				"operationId": "/opcos/{opcoId}/customers/{customerId}/sitenames",
-				"description": "[Customers] Get sitenames for systems",
+				"security": [
+					{
+						"apikey": []
+					}
+				],
 				"parameters": [
 					{
 						"$ref": "#/parameters/opcoId"
@@ -471,11 +499,15 @@
 		},
 		"/opcos/{opcoId}/customerorders": {
 			"post": {
+				"operationId": "/opcos/{opcoId}/customerorders (POST)",
 				"tags": [
 					"CustomerOrders"
 				],
-				"operationId": "/opcos/{opcoId}/customerorders (POST)",
-				"description": "Create order for systems",
+				"security": [
+					{
+						"apikey": []
+					}
+				],
 				"parameters": [
 					{
 						"$ref": "#/parameters/opcoId"
@@ -501,11 +533,15 @@
 		},
 		"/opcos/{opcoId}/customerorders/{orderId}": {
 			"get": {
+				"operationId": "/opcos/{opcoId}/customerorders/{orderid} (GET)",
 				"tags": [
 					"CustomerOrders"
 				],
-				"operationId": "/opcos/{opcoId}/customerorders/{orderid} (GET)",
-				"description": "Get order lines for systems",
+				"security": [
+					{
+						"apikey": []
+					}
+				],
 				"parameters": [
 					{
 						"$ref": "#/parameters/opcoId"
@@ -524,11 +560,15 @@
 				}
 			},
 			"put": {
+				"operationId": "/opcos/{opcoId}/customerorders/{orderId} (PUT)",
 				"tags": [
 					"CustomerOrders"
 				],
-				"operationId": "/opcos/{opcoId}/customerorders/{orderId} (PUT)",
-				"description": "Update order for systems",
+				"security": [
+					{
+						"apikey": []
+					}
+				],
 				"parameters": [
 					{
 						"$ref": "#/parameters/opcoId"
@@ -555,10 +595,15 @@
 				}
 			},
 			"delete": {
+				"operationId": "/opcos/{opcoId}/customerorders/{orderId} (DELETE)",
 				"tags": [
 					"CustomerOrders"
 				],
-				"operationId": "/opcos/{opcoId}/customerorders/{orderId} (DELETE)",
+				"security": [
+					{
+						"apikey": []
+					}
+				],
 				"description": "Delete order for systems",
 				"parameters": [
 					{
@@ -580,10 +625,15 @@
 		},
 		"/opcos/{opcoId}/customerorders/{orderId}/deliverydate": {
 			"put": {
+				"operationId": "/opcos/{opcoId}/customerorders/{orderId}/deliverydate (PUT)",
 				"tags": [
 					"CustomerOrders"
 				],
-				"operationId": "/opcos/{opcoId}/customerorders/{orderId}/deliverydate (PUT)",
+				"security": [
+					{
+						"apikey": []
+					}
+				],
 				"description": "Update order deliverydate for systems",
 				"parameters": [
 					{
@@ -613,11 +663,10 @@
 		},
 		"/opcos/swagger.json": {
 			"get": {
+				"operationId": "/customers/swagger.json",
 				"tags": [
 					"Swagger"
 				],
-				"security": [],
-				"operationId": "/customers/swagger.json",
 				"description": "this swaggers documentation",
 				"responses": {
 					"200": {
