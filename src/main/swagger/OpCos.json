@@ -30,7 +30,7 @@
 	"schemes": [
 		"https"
 	],
-	"basePath": "/dev/v2",
+	"basePath": "/test/v2",
 	"produces": [
 		"application/json",
 		"application/xml"
