@@ -353,9 +353,8 @@
 						"in": "query",
 						"required": false,
 						"type": "string",
-						"default": "EUR",
+						"default": "CAD",
 						"enum": [
-							"EUR",
 							"CAD"
 						]
 					},

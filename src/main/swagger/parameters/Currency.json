@@ -1,0 +1,11 @@
+{
+	"name": "currency",
+	"in": "query",
+	"required": false,
+	"type": "string",
+	"default": "EUR",
+	"enum": [
+		"EUR",
+		"CAD"
+	]
+}
