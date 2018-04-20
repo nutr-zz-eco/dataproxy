@@ -1,3 +1,4 @@
 ---
 index:
-  - $ref: OpCos.json
+  OpCos:
+    $ref: OpCos.json
