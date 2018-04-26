@@ -76,7 +76,7 @@
 				],
 				"responses": {
 					"200": {
-						"description": "Credentials",
+						"description": "OK",
 						"schema": {
 							"$ref": "#/definitions/Credentials"
 						}
@@ -86,9 +86,6 @@
 					},
 					"401": {
 						"description": "Unauthorized"
-					},
-					"403": {
-						"description": "Forbidden"
 					}
 				}
 			}
