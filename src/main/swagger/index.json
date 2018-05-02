@@ -1,0 +1,20 @@
+{
+	"urls": [
+		{
+			"name": "Login",
+			"url": "Login.json"
+		},
+		{
+			"name": "OpCos",
+			"url": "OpCos.json"
+		},
+		{
+			"name": "Customers",
+			"url": "Customers.json"
+		},
+		{
+			"name": "Samples",
+			"url": "Samples.json"
+		}
+	]
+}
