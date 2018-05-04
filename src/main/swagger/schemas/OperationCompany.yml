@@ -1,0 +1,43 @@
+---
+type: object
+properties:
+  CompanyConfigId:
+    type: integer
+    example: 1
+    examples: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
+  CompanyName:
+    type: string
+    example: Trouw Nutrition Nederland B.V.
+  App:
+    type: string
+    example: Trouw Nutrition
+  Installation:
+    type: string
+    example: Unite
+    examples: [Unite,Legacy]
+  Environment:
+    type: string
+    example: NUP1
+    examples: [NUP1,TNP1,SKP1]
+  Cono:
+    type: string
+    example: "1"
+    examples: ["1","6"]
+  Divi:
+    type: string
+    example: "100"
+  Faci:
+    type: string
+    example: "100"
+  Whlo:
+    type: string
+    example: "100"
+  Ortp:
+    type: string
+    example: "001"
+  Rss:
+    type: string
+    example: http://www.trouwnutrition.nl/rss
+  ComplaintMailReceivers:
+    type: string
+    example: thomas@systorvest.no, mees.spoor@nutreco.com

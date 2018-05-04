@@ -1,0 +1,127 @@
+---
+openapi: "3.0.0"
+info:
+  title: OpCos
+  version: "2.1"
+  contact:
+    name: Nutreco
+servers:
+  - description: development
+    url: https://api.nutreco.com/dev/v2
+  - description: test
+    url: https://api.nutreco.com/test/v2
+  - description: production
+    url: https://api.nutreco.com/v2
+  - description: proxy
+    url: "/{baseURL}"
+    variables:
+      baseURL:
+        enum:
+          - https://api.nutreco.com/dev/v2
+          - https://api.nutreco.com/test/v2
+          - https://api.nutreco.com/v2
+        default: https://api.nutreco.com/dev/v2
+tags:
+  - name: OpCos
+    description: Operation Companies
+  - name: Customers
+    description: Customer API for backend systems
+  - name: Products
+    description: Products API for backend systems
+  - name: CustomerOrders
+    description: CustomerOrders API for backend systems
+  - name: Swagger
+    description: Swagger
+paths:
+  /opcos:
+    get:
+      operationId: GET/opcos
+      tags:
+        - OpCos
+      security:
+        - oauth: [Customer]
+      parameters: []
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Success:
+                    type: boolean
+                    default: true
+                  OpCos:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/OperationCompany"
+  /opcos/{opcoId}/freightcharges:
+    get:
+      operationId: GET/opcos/{opcoId}/freightcharges
+      tags:
+        - Products
+      security:
+        - apikey: []
+      parameters:
+        - name: opcoId
+          in: path
+          default: "12"
+          schema:
+            $ref: "#/components/schemas/opcoId"
+        - name: unloadingzone
+          in: query
+          default: CABAR
+          schema:
+            $ref: "#/components/schemas/unloadingZone"
+        - name: deliverymethod
+          in: query
+          default: "120"
+          schema:
+            $ref: "#/components/schemas/deliveryMethod"
+      responses:
+        200:
+          description: OK
+  /opcos/{opcoId}/customers/{customerId}/addresses:
+    get:
+      operationId: GET/opcos/{opcoId}/customers/{customerId}/addresses
+      tags:
+        - Customers
+      security:
+        - oauth: [Customer]
+      parameters:
+        - name: opcoId
+          in: path
+          default: "12"
+          schema:
+            $ref: "#/components/schemas/opcoId"
+        - name: customerId
+          in: path
+          default: "124681"
+          schema:
+            $ref: "#/components/schemas/customerId"
+      responses:
+        200:
+          description: OK
+components:
+  schemas:
+    opcoId:
+      type: string
+      default: "12"
+      example: "12"
+    customerId:
+      type: string
+      default: "124681"
+      example: "124681"
+    unloadingZone:
+      type: string
+      example: CABAR
+    deliveryMethod:
+      type: string
+    OperationCompany:
+      $ref: schemas/OperationCompany.yml
+  securitySchemes:
+    apikey:
+      $ref: securitySchemes/apikey.yml
+    oauth:
+      $ref: securitySchemes/oauth.yml

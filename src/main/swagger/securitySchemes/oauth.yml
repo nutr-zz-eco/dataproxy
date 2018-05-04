@@ -1,0 +1,7 @@
+---
+type: oauth2,
+tokenUrl: https://api.nutreco.com/dev/v2/login/token
+flow: password
+scopes:
+  Customer: InAppCustomer
+

@@ -1,0 +1,6 @@
+---
+name: opcoId
+in: path,
+required: true
+type: string,
+default: "1"
