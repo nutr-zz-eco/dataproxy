@@ -97,7 +97,7 @@ paths:
             $ref: "#/components/schemas/opcoId"
         - name: customerId
           in: path
-          default: "124681"
+          default: "149516"
           schema:
             $ref: "#/components/schemas/customerId"
       responses:

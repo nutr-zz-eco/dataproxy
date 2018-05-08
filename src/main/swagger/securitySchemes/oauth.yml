@@ -1,7 +1,8 @@
 ---
-type: oauth2,
-tokenUrl: https://api.nutreco.com/dev/v2/login/token
-flow: password
-scopes:
-  Customer: InAppCustomer
+type: oauth2
+flows:
+  password:
+    tokenUrl: https://api.nutreco.com/dev/v2/login/token
+    scopes:
+      Customer: InAppCustomer
 
