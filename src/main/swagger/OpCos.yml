@@ -56,6 +56,222 @@ paths:
                     type: array
                     items:
                       $ref: "#/components/schemas/OperationCompany"
+  /opcos/{opcoId}:
+    get:
+      operationId: GET/opcos/{opcoId}
+      tags:
+        - OpCos
+      security:
+        - oauth: [Customer]
+      parameters:
+        - name: opcoId
+          in: path
+          default: "1"
+          schema:
+            $ref: "#/components/schemas/opcoId"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OperationCompany"
+  /opcos/{opcoId}/contactandabout:
+    get:
+      operationId: GET/opcos/{opcoId}/contactandabout
+      tags:
+        - OpCos
+      security:
+        - oauth: [Customer]
+      parameters:
+        - name: opcoId
+          in: path
+          default: "1"
+          schema:
+            $ref: "#/components/schemas/opcoId"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OpCosContactAndAboutRes"
+  /opcos/{opcoId}/news:
+    get:
+      operationId: GET/opcos/{opcoId}/news
+      tags:
+        - OpCos
+      security:
+        - oauth: [Customer]
+      parameters:
+        - name: opcoId
+          in: path
+          default: "1"
+          schema:
+            $ref: "#/components/schemas/opcoId"
+      responses:
+        200:
+          description: OK
+  /opcos/{opcoId}/customers/{customerId}/products:
+    get:
+      operationId: GET/opcos/{opcoId}/customers/{customerId}/products
+      tags:
+        - Products
+      security:
+        - apikey: []
+      parameters:
+        - name: opcoId
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/opcoId"
+        - name: customerId
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/customerId"
+        - name: lang
+          in: query
+          schema:
+            $ref: "#/components/schemas/lang"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  articleListChanged:
+                    type: boolean
+                  hash:
+                    type: string
+                  articleList:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Article"
+  /opcos/{opcoId}/customers/{customerId}/products/pricelist:
+    get:
+      operationId: GET/opcos/{opcoId}/customers/{customerId}/products/pricelist
+      tags:
+        - Products
+      security:
+        - apikey: []
+      parameters:
+        - name: opcoId
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/opcoId"
+        - name: customerId
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/customerId"
+        - name: lang
+          in: query
+          schema:
+            $ref: "#/components/schemas/lang"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Products:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Product"
+  /opcos/{opcoId}/customers/{customerId}/products/{productId}:
+    get:
+      operationId: GET/opcos/{opcoId}/customers/{customerId}/products/{productId}
+      tags:
+        - Products
+      security:
+        - apikey: []
+      parameters:
+        - name: opcoId
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/opcoId"
+        - name: customerId
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/customerId"
+        - name: productId
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/productId"
+        - name: lang
+          in: query
+          schema:
+            $ref: "#/components/schemas/lang"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+  /opcos/{opcoId}/customers/{customerId}/products/{productId}/price:
+    get:
+      operationId: GET/opcos/{opcoId}/customers/{customerId}/products/{productId}/price
+      tags:
+        - Products
+      security:
+        - apikey: []
+      parameters:
+        - name: opcoId
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/opcoId"
+        - name: customerId
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/customerId"
+        - name: productId
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/productId"
+        - name: qty
+          in: query
+          default: 1
+          schema:
+            type: number
+            format: float
+        - name: uom
+          in: query
+          default: KG
+          schema:
+            type: string
+            enum: [KG,MT]
+        - name: currency
+          in: query
+          default: CAD
+          schema:
+            type: string
+            enum: [CAD]
+        - name: date
+          in: query
+          default: now
+          schema:
+            type: string
+            format: date
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
   /opcos/{opcoId}/freightcharges:
     get:
       operationId: GET/opcos/{opcoId}/freightcharges
@@ -103,6 +319,219 @@ paths:
       responses:
         200:
           description: OK
+  /opcos/{opcoId}/customers/{customerId}/orders:
+    get:
+      operationId: GET/opcos/{opcoId}/customers/{customerId}/orders
+      tags:
+        - CustomerOrders
+      security:
+        - apikey: []
+      parameters:
+        - name: opcoId
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/opcoId"
+        - name: customerId
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/customerId"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CustomerOrder"
+  /opcos/{opcoId}/customers/{customerId}/sitesettings:
+    get:
+      operationId: GET/opcos/{opcoId}/customers/{customerId}/sitesettings
+      tags:
+        - Customers
+      security:
+        - apikey: []
+      parameters:
+        - name: opcoId
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/opcoId"
+        - name: customerId
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/customerId"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SiteSettings"
+  /opcos/{opcoId}/customers/{customerId}/sitenames:
+    get:
+      operationId: GET/opcos/{opcoId}/customers/{customerId}/sitenames
+      tags:
+        - Customers
+      security:
+        - apikey: []
+      parameters:
+        - name: opcoId
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/opcoId"
+        - name: customerId
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/customerId"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SiteNames"
+  /opcos/{opcoId}/customerorders:
+    post:
+      operationId: POST/opcos/{opcoId}/customerorders
+      tags:
+        - CustomerOrders
+      security:
+        - apikey: []
+      parameters:
+        - name: opcoId
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/opcoId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+  /opcos/{opcoId}/customerorders/{orderId}:
+    get:
+      operationId: GET/opcos/{opcoId}/customerorders/{orderId}
+      tags:
+        - CustomerOrders
+      security:
+        - apikey: []
+      parameters:
+        - name: opcoId
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/opcoId"
+        - name: orderId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+    put:
+      tags:
+        - CustomerOrders
+      security:
+        - apikey: []
+      parameters:
+        - name: opcoId
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/opcoId"
+        - name: orderId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+    delete:
+      tags:
+        - CustomerOrders
+      security:
+        - apikey: []
+      parameters:
+        - name: opcoId
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/opcoId"
+        - name: orderId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+  /opcos/{opcoId}/customerorders/{orderId}/deliverydate:
+    put:
+      operationId: PUT/opcos/{opcoId}/customerorders/{orderId}/deliverydate
+      tags:
+        - CustomerOrders
+      security:
+        - apikey: []
+      parameters:
+        - name: opcoId
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/opcoId"
+        - name: orderId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
 components:
   schemas:
     opcoId:
