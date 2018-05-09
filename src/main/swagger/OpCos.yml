@@ -304,7 +304,7 @@ paths:
       tags:
         - Customers
       security:
-        - oauth: [Customer]
+        - apikey: []
       parameters:
         - name: opcoId
           in: path
