@@ -272,7 +272,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Product"
-  /opcos/{opcoId}/freightcharges:
+  /opcos/{opcoId}/customers/{customerId}/freightcharges:
     get:
       operationId: GET/opcos/{opcoId}/freightcharges
       tags:
