@@ -1,0 +1,167 @@
+openapi: '3.0.0'
+info:
+  title: Login
+  version: v2
+  description: 'API: Login_v3MultipleIDP (in Apigee)'
+servers:
+  - description: dev
+    url: https://api.nutreco.com/dev/v2
+paths:
+  /login/register:
+    post:
+      operationId: POST/login/register
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        200:
+          description: OK
+  /login/token:
+    post:
+      security:
+        - basic: []
+      operationId: /login/token
+      description: 'Login based on OAuth 2.0, using the password granttype. System level authentication based on consumerKey and consumerSecret, issued to the developer upon App registration.'
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required: [username,password,scope,grant_type]
+              properties:
+                username:
+                  type: string
+                  default: username
+                password:
+                  type: string
+                  default: password
+                scope:
+                  type: string
+                  default: InAppCustomer
+                grant_type:
+                  type: string
+                  default: password
+                  enum:
+                    - password
+                    - refresh_token
+                refresh_token:
+                  description: token to be refreshed if grant_type=refresh_token
+                  type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Credentials'
+        400:
+          description: Bad Request
+        401:
+          description: Unauthorized
+components:
+  securitySchemes:
+    basic:
+      type: http
+      scheme: basic
+  schemas:
+    User:
+      type: object
+      properties:
+        profile:
+          $ref: "#/components/schemas/Profile"
+    Username:
+      type: string
+      default: user@example.com
+      example: user@example.com
+    Credentials:
+      type: object
+      properties:
+        session:
+          $ref: '#/components/schemas/Session'
+        profile:
+          $ref: '#/components/schemas/Profile'
+        roles:
+          $ref: '#/components/schemas/Roles'
+    Profile:
+      type: object
+      required: [firstName,lastName,email,login,mobilePhone]
+      properties:
+        login:
+          $ref: "#/components/schemas/Username"
+        mobilePhone:
+          type: string
+          example: 555-415-1337
+        email:
+          $ref: "#/components/schemas/Username"
+        secondEmail:
+          type: string
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: Doe
+        streetAddress:
+          type: string
+        organization:
+          type: string
+        arrayCustomerNr:
+          type: string
+        primaryPhone:
+          type: string
+        zipCode:
+          type: string
+        city:
+          type: string
+    Roles:
+      type: array
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+          description:
+            type: string
+    Session:
+      type: object
+      properties:
+        refresh_token_expires_in:
+          type: string
+        refresh_token_status:
+          type: string
+        api_product_list:
+          type: string
+        oktaCustomers:
+          type: string
+        organization_name:
+          type: string
+        developer.email:
+          type: string
+        token_type:
+          type: string
+        customerNumber:
+          type: string
+        issued_at:
+          type: string
+        client_id:
+          type: string
+        customerName:
+          type: string
+        access_token:
+          type: string
+        refresh_token:
+          type: string
+        application_name:
+          type: string
+        scope:
+          type: string
+        refresh_token_issued_at:
+          type: string
+        expires_in:
+          type: string
+        refresh_count:
+          type: string
+        status:
+          type: string
