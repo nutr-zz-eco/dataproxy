@@ -1,12 +1,18 @@
 {
+	"securitySchemes": true,
 	"urls": [
 		{
-			"name": "OpCos",
-			"url": "OpCos.yml"
+			"name": "Login",
+			"url": "https://api.nutreco.com/dev/dataproxy/swagger/Login.json"
 		},
 		{
-			"name": "Login",
-			"url": "Login.json"
+			"name": "OpCos",
+			"url": "https://api.nutreco.com/dev/dataproxy/swagger/OpCos.yml"
+		},
+		{
+			"name": "Okta",
+			"url": "~NU/nu-swagger/backends/Okta.yml",
+			"security": true
 		}
 	]
 }
