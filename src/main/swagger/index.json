@@ -3,7 +3,7 @@
 	"urls": [
 		{
 			"name": "Login",
-			"url": "https://api.nutreco.com/dev/dataproxy/swagger/Login.json"
+			"url": "https://api.nutreco.com/dev/dataproxy/swagger/Login.yml"
 		},
 		{
 			"name": "OpCos",
