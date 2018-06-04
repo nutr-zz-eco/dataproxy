@@ -9,6 +9,8 @@ servers:
 paths:
   /login/register:
     post:
+      security:
+        - basic: []
       operationId: POST/login/register
       requestBody:
         content:
