@@ -12,6 +12,8 @@ paths:
       security:
         - basic: []
       operationId: POST/login/register
+      summary: register a new user at one of the Okta instances
+      description: It depends on the application Apigee at which instance the user is registered. Either set the property brand=trouw or brand=skretting on the application. Otherwise the user is registered by default on the internal Okta instance.
       requestBody:
         content:
           application/json:
