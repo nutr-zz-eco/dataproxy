@@ -7,7 +7,7 @@ servers:
   - description: dev
     url: https://api.nutreco.com/dev/v2
 paths:
-  /login/signup:
+  /login/register:
     post:
       security:
         - basic: []
@@ -19,6 +19,22 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/User"
+      responses:
+        200:
+          description: OK
+  /login/{username}/reset:
+    post:
+      security:
+        - basic: []
+      operationId: POST/login/reset
+      summary: reset the password of a user
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
+            example: user@example.com
       responses:
         200:
           description: OK
