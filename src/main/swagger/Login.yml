@@ -7,7 +7,7 @@ servers:
   - description: dev
     url: https://api.nutreco.com/dev/v2
 paths:
-  /login/register:
+  /login/signup:
     post:
       security:
         - basic: []
