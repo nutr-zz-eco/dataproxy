@@ -1,0 +1,466 @@
+openapi: 3.0.0
+info:
+  title: Firestore
+  version: 1.0.0
+  contact:
+    name: Nutreco
+servers:
+  - description: development
+    url: https://api.nutreco.com/dev/firebase
+paths:
+  /token:
+    post:
+      security:
+        - apikey: []
+      operationId: POST/token
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+  /purchaseorders:
+    get:
+      operationId: GET/purchaseorders
+      parameters:
+        - $ref: "#/components/parameters/days"
+      responses:
+        200:
+          $ref: "#/components/responses/PurchaseOrders"
+    post:
+      operationId: POST/purchaseorders
+      requestBody:
+        $ref: "#/components/requestBodies/PurchaseOrder"
+      responses:
+        200:
+          $ref: "#/components/responses/PurchaseOrder"
+    delete:
+      operationId: DELETE/purchaseorders
+      parameters:
+        - $ref: "#/components/parameters/days"
+      responses:
+        204:
+          $ref: "#/components/responses/NoContent"
+  /purchaseorders/{orderNumber}:
+    get:
+      security:
+        - oauth: [admin]
+      operationId: GET/purchaseorders/{orderNumber}
+      parameters:
+        - $ref: "#/components/parameters/orderNumber"
+      responses:
+        200:
+          $ref: "#/components/responses/PurchaseOrder"
+    put:
+      security:
+        - oauth: [admin]
+      operationId: PUT/purchaseorders/{orderNumber}
+      parameters:
+        - $ref: "#/components/parameters/orderNumber"
+      responses:
+        200:
+          $ref: "#/components/responses/PurchaseOrder"
+    delete:
+      security:
+        - oauth: [admin]
+      operationId: DELETE/purchaseorders/{uuid}
+      parameters:
+        - $ref: "#/components/parameters/orderNumber"
+      responses:
+        200:
+          $ref: "#/components/responses/PurchaseOrder"
+  /purchaseorderlines:
+    get:
+      security:
+        - oauth: [admin]
+      operationId: GET/purchaseorderlines
+      parameters:
+        - $ref: "#/components/parameters/days"
+      responses:
+        200:
+          $ref: "#/components/responses/PurchaseOrderlines"
+    post:
+      security:
+        - oauth: [admin]
+      operationId: POST/purchaseorderlines
+      requestBody:
+        $ref: "#/components/requestBodies/PurchaseOrderline"
+      responses:
+        200:
+          $ref: "#/components/responses/PurchaseOrderline"
+    delete:
+      security:
+        - oauth: [admin]
+      operationId: DELETE/purchaseorderlines
+      parameters:
+        - $ref: "#/components/parameters/days"
+      responses:
+        204:
+          $ref: "#/components/responses/NoContent"
+  /purchaseorderlines/{orderNumber}/{orderlineNumber}:
+    get:
+      operationId: GET/purchaseorderlines/{orderNumber}/{orderlineNumber}
+      parameters:
+        - $ref: "#/components/parameters/orderNumber"
+        - $ref: "#/components/parameters/orderlineNumber"
+      responses:
+        200:
+          $ref: "#/components/responses/PurchaseOrderline"
+    put:
+      operationId: PUT/purchaseorderlines/{orderNumber}/{orderlineNumber}
+      parameters:
+        - $ref: "#/components/parameters/orderNumber"
+        - $ref: "#/components/parameters/orderlineNumber"
+      requestBody:
+        $ref: "#/components/requestBodies/PurchaseOrderline"
+      responses:
+        200:
+          $ref: "#/components/responses/PurchaseOrderline"
+    delete:
+      operationId: DELETE/purchaseorderlines/{orderNumber}/{orderlineNumber}
+      parameters:
+        - $ref: "#/components/parameters/orderNumber"
+        - $ref: "#/components/parameters/orderlineNumber"
+      responses:
+        200:
+          $ref: "#/components/responses/PurchaseOrderline"
+  /customerorders:
+    get:
+      security:
+        - oauth: [admin]
+      operationId: GET/customerorders
+      parameters:
+        - $ref: "#/components/parameters/deliveryNumber"
+        - $ref: "#/components/parameters/messageNumber"
+        - $ref: "#/components/parameters/days"
+      responses:
+        200:
+          $ref: "#/components/responses/CustomerOrders"
+    post:
+      security:
+        - oauth: [admin]
+      operationId: POST/customerorders
+      requestBody:
+        $ref: "#/components/requestBodies/CustomerOrder"
+      responses:
+        200:
+          $ref: "#/components/responses/CustomerOrder"
+    delete:
+      operationId: DELETE/customerorders
+      parameters:
+        - $ref: "#/components/parameters/deliveryNumber"
+        - $ref: "#/components/parameters/messageNumber"
+        - $ref: "#/components/parameters/days"
+      responses:
+        204:
+          $ref: "#/components/responses/NoContent"
+  /customerorders/{orderNumber}:
+    get:
+      security:
+        - oauth: [admin]
+      operationId: GET/customerorders/{orderNumber}
+      parameters:
+        - $ref: "#/components/parameters/orderNumber"
+      responses:
+        200:
+          $ref: "#/components/responses/CustomerOrder"
+    put:
+      security:
+        - oauth: [admin]
+      operationId: PUT/customerorders/{orderNumber}
+      parameters:
+        - $ref: "#/components/parameters/orderNumber"
+      responses:
+        200:
+          $ref: "#/components/responses/CustomerOrder"
+    delete:
+      security:
+        - oauth: [admin]
+      operationId: DELETE/customerorders/{uuid}
+      parameters:
+        - $ref: "#/components/parameters/orderNumber"
+      responses:
+        200:
+          $ref: "#/components/responses/CustomerOrder"
+  /customerorderlines/{orderNumber}/{orderlineNumber}:
+    get:
+      operationId: GET/customerorderlines/{orderNumber}/{orderlineNumber}
+      parameters:
+        - $ref: "#/components/parameters/orderNumber"
+        - $ref: "#/components/parameters/orderlineNumber"
+      responses:
+        200:
+          $ref: "#/components/responses/CustomerOrderline"
+    put:
+      operationId: PUT/customerorderlines/{orderNumber}/{orderlineNumber}
+      parameters:
+        - $ref: "#/components/parameters/orderNumber"
+        - $ref: "#/components/parameters/orderlineNumber"
+      requestBody:
+        $ref: "#/components/requestBodies/CustomerOrderline"
+      responses:
+        200:
+          $ref: "#/components/responses/CustomerOrderline"
+    delete:
+      operationId: DELETE/customerorderlines/{orderNumber}/{orderlineNumber}
+      parameters:
+        - $ref: "#/components/parameters/orderNumber"
+        - $ref: "#/components/parameters/orderlineNumber"
+      responses:
+        200:
+          $ref: "#/components/responses/CustomerOrderline"
+components:
+  parameters:
+    orderNumber:
+      name: orderNumber
+      in: path
+      required: true
+      schema:
+        $ref: "#/components/schemas/orderNumber"
+    orderlineNumber:
+      name: orderlineNumber
+      in: path
+      required: true
+      schema:
+        $ref: "#/components/schemas/orderlineNumber"
+    customerNumber:
+      name: customerNumber
+      in: query
+      schema:
+        $ref: "#/components/schemas/customerNumber"
+    deliveryNumber:
+      name: deliveryNumber
+      in: query
+      schema:
+        $ref: "#/components/schemas/deliveryNumber"
+    messageNumber:
+      name: messageNumber
+      in: query
+      schema:
+        $ref: "#/components/schemas/messageNumber"
+    days:
+      name: days
+      in: query
+      schema:
+        $ref: "#/components/schemas/days"
+  requestBodies:
+    PurchaseOrder:
+      description: PurchaseOrder
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/PurchaseOrder"
+    PurchaseOrderline:
+      description: PurchaseOrderline
+      content:
+        application/json:
+         schema:
+          $ref: "#/components/schemas/PurchaseOrderline"
+    CustomerOrder:
+      description: CustomerOrder
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CustomerOrder"
+    CustomerOrderline:
+      description: CustomerOrderline
+      content:
+        application/json:
+         schema:
+          $ref: "#/components/schemas/CustomerOrderline"
+  responses:
+    NoContent:
+      description: No Content
+    PurchaseOrders:
+      description: PurchaseOrders
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/PurchaseOrders"
+    PurchaseOrder:
+      description: PurchaseOrder
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/PurchaseOrder"
+    PurchaseOrderlines:
+      description: PurchaseOrderlines
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/PurchaseOrderlines"
+    PurchaseOrderline:
+      description: PurchaseOrderline
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/PurchaseOrderline"
+    CustomerOrders:
+      description: CustomerOrders
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CustomerOrders"
+    CustomerOrder:
+      description: CustomerOrder
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CustomerOrder"
+    CustomerOrderlines:
+      description: CustomerOrderlines
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CustomerOrderlines"
+    CustomerOrderline:
+      description: CustomerOrderline
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CustomerOrderline"
+  securitySchemes:
+    apikey:
+      type: apiKey
+      in: header
+      name: apikey
+    oauth:
+      type: oauth2
+      flows:
+        password:
+          tokenUrl: https://api.nutreco.com/dev/firebase/token
+          scopes:
+            admin: admin
+  schemas:
+    orderNumber:
+      type: string
+    orderlineNumber:
+      type: string
+    customerNumber:
+      type: string
+    deliveryNumber:
+      type: string
+    messageNumber:
+      type: string
+    days:
+      type: integer
+      minimum: 0
+    PurchaseOrders:
+      type: object
+      properties:
+        PurchaseOrder:
+          type: array
+          items:
+            $ref: "#/components/schemas/PurchaseOrder"
+    PurchaseOrder:
+      type: object
+      properties:
+        PurchaseOrderNumber:
+          $ref: "#/components/schemas/orderNumber"
+        OrderLines:
+          $ref: "#/components/schemas/PurchaseOrderlines"
+    PurchaseOrderlines:
+      type: array
+      items:
+        $ref: "#/components/schemas/PurchaseOrderline"
+    PurchaseOrderline:
+      type: object
+      example:
+        $ref: "#/components/examples/PurchaseOrderline"
+    CustomerOrders:
+      type: object
+      properties:
+        CustomerOrder:
+          type: array
+          items:
+            $ref: "#/components/schemas/CustomerOrder"
+    CustomerOrder:
+      type: object
+      properties:
+        COBlockCode:
+          type: string
+          example: "9"
+        CustomerOrderNumber:
+          $ref: "#/components/schemas/orderNumber"
+        CustomerNumber:
+          $ref: "#/components/schemas/customerNumber"
+        DeliveryNumber:
+          $ref: "#/components/schemas/deliveryNumber"
+        MessageNumber:
+          $ref: "#/components/schemas/messageNumber"
+        OrderDate:
+          type: string
+        OrderAmount:
+          type: string
+        Facility:
+          type: string
+        FreightType:
+          type: string
+          example: CIF
+        SalesPerson:
+          type: string
+        DeliveryAddresses:
+          type: array
+          items:
+            $ref: "#/components/schemas/DeliveryAddress"
+        OrderLines:
+          $ref: "#/components/schemas/CustomerOrderlines"
+    CustomerOrderlines:
+      type: array
+      items:
+        $ref: "#/components/schemas/CustomerOrderline"
+    CustomerOrderline:
+      type: object
+      example:
+        $ref: "#/components/examples/CustomerOrderline"
+    DeliveryAddress:
+      type: object
+      example:
+        $ref: "#/components/examples/DeliveryAddress"
+  examples:
+    PurchaseOrderline:
+      PurchaseOrderNumber: "1012660"
+      PurchaseOrderLineNumber: "10"
+      PurchaseOrderNumberLineNumber: "1012660/10"
+      CityCode: "48500"
+      ConversionFactor: "."
+      RemainQuantity: "0.000000"
+      PostalCode: "11010-121"
+      City: "Santos"
+      SupplierNumber: "168186"
+      TelephoneNumber: "+55 2138617013"
+      SupplierAddressLine1: "Rua General Camara"
+      Neighborhood: "Centro"
+      UoM: "KG"
+      ItemNumber: "10087450"
+      ReceivedQuantity: "1000.000"
+      TotalQuantity: "1000.000"
+      SupplierName: "Salinor - Salinas Do Nordeste S.A"
+      PurchaseOrderDate: "2018-06-12T00:00:00"
+      State: "SP"
+      ItemName: "Salt Feed Grade"
+      RequestedDeliveryDate: "2018-06-29T23:59:00"
+      Facility: "54A"
+    CustomerOrderline:
+      OrderLineNumber: "1"
+      ItemNumber: "11871235"
+      StockStatus: "22"
+      GroupTechnologyDescription: null
+      Quantity: "2000.000000"
+      RequestedDeliveryDate: "20180219"
+      NetWeight: "1.000"
+      AddressId: "540002"
+      GroupTechnology: null
+      ItemDescription: "Fri Ovo (F) 20kg"
+      PackSize: "20"
+    DeliveryAddress:
+      CityCode: "06102"
+      UF: "SP"
+      ZipCode: "14701-690"
+      Co-driver: "N"
+      Country: "BR"
+      DeliveryAddressLine2: "Jd Cruzeiro"
+      DeliveryAddressLine1: "Avenida Jose Cutrale Junior"
+      City: "Bebedouro"
+      AddressId: "540002"
