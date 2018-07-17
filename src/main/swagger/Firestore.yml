@@ -7,6 +7,8 @@ info:
 servers:
   - description: development
     url: https://api.nutreco.com/dev/firebase
+security:
+  - oauth: [admin]
 paths:
   /token:
     post:
@@ -44,8 +46,6 @@ paths:
           $ref: "#/components/responses/NoContent"
   /purchaseorders/{orderNumber}:
     get:
-      security:
-        - oauth: [admin]
       operationId: GET/purchaseorders/{orderNumber}
       parameters:
         - $ref: "#/components/parameters/orderNumber"
@@ -53,8 +53,6 @@ paths:
         200:
           $ref: "#/components/responses/PurchaseOrder"
     put:
-      security:
-        - oauth: [admin]
       operationId: PUT/purchaseorders/{orderNumber}
       parameters:
         - $ref: "#/components/parameters/orderNumber"
@@ -62,8 +60,6 @@ paths:
         200:
           $ref: "#/components/responses/PurchaseOrder"
     delete:
-      security:
-        - oauth: [admin]
       operationId: DELETE/purchaseorders/{uuid}
       parameters:
         - $ref: "#/components/parameters/orderNumber"
@@ -72,8 +68,6 @@ paths:
           $ref: "#/components/responses/PurchaseOrder"
   /purchaseorderlines:
     get:
-      security:
-        - oauth: [admin]
       operationId: GET/purchaseorderlines
       parameters:
         - $ref: "#/components/parameters/days"
@@ -81,8 +75,6 @@ paths:
         200:
           $ref: "#/components/responses/PurchaseOrderlines"
     post:
-      security:
-        - oauth: [admin]
       operationId: POST/purchaseorderlines
       requestBody:
         $ref: "#/components/requestBodies/PurchaseOrderline"
@@ -90,8 +82,6 @@ paths:
         200:
           $ref: "#/components/responses/PurchaseOrderline"
     delete:
-      security:
-        - oauth: [admin]
       operationId: DELETE/purchaseorderlines
       parameters:
         - $ref: "#/components/parameters/days"
@@ -127,8 +117,6 @@ paths:
           $ref: "#/components/responses/PurchaseOrderline"
   /customerorders:
     get:
-      security:
-        - oauth: [admin]
       operationId: GET/customerorders
       parameters:
         - $ref: "#/components/parameters/deliveryNumber"
@@ -138,8 +126,6 @@ paths:
         200:
           $ref: "#/components/responses/CustomerOrders"
     post:
-      security:
-        - oauth: [admin]
       operationId: POST/customerorders
       requestBody:
         $ref: "#/components/requestBodies/CustomerOrder"
@@ -157,8 +143,6 @@ paths:
           $ref: "#/components/responses/NoContent"
   /customerorders/{orderNumber}:
     get:
-      security:
-        - oauth: [admin]
       operationId: GET/customerorders/{orderNumber}
       parameters:
         - $ref: "#/components/parameters/orderNumber"
@@ -166,8 +150,6 @@ paths:
         200:
           $ref: "#/components/responses/CustomerOrder"
     put:
-      security:
-        - oauth: [admin]
       operationId: PUT/customerorders/{orderNumber}
       parameters:
         - $ref: "#/components/parameters/orderNumber"
@@ -175,8 +157,6 @@ paths:
         200:
           $ref: "#/components/responses/CustomerOrder"
     delete:
-      security:
-        - oauth: [admin]
       operationId: DELETE/customerorders/{uuid}
       parameters:
         - $ref: "#/components/parameters/orderNumber"
