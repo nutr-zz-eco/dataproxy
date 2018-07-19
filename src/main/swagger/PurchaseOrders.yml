@@ -1,0 +1,288 @@
+openapi: 3.0.0
+info:
+  title: Firestore
+  version: 1.0.0
+  contact:
+    name: Nutreco
+servers:
+  - description: development
+    url: https://api.nutreco.com/dev/firebase/dev/v1
+security:
+  basic: []
+paths:
+  /ocarpurchaseorders:
+    post:
+      operationId: POST/ocarpurchaseorders
+      requestBody:
+          $ref: "#/components/requestBodies/OCARPurchaseOrder"
+      responses:
+        200:
+          $ref: "#/components/responses/OCARPurchaseOrders"
+    delete:
+      operationId: DELETE/ocarpurchaseorders
+      parameters:
+        - $ref: "#/components/parameters/days"
+      responses:
+        204:
+          $ref: "#/components/responses/OCARPurchaseOrders"
+  /ocarpurchaseorders/{orderNumber}/{orderlineNumber}:
+    get:
+      operationId: GET/ocarpurchaseorders/{orderNumber}/{orderlineNumber}
+      parameters:
+        - $ref: "#/components/parameters/orderNumber"
+        - $ref: "#/components/parameters/orderlineNumber"
+      responses:
+        200:
+          $ref: "#/components/responses/OCARPurchaseOrders"
+    put:
+      operationId: GET/ocarpurchaseorders/{orderNumber}/{orderlineNumber}
+      parameters:
+        - $ref: "#/components/parameters/orderNumber"
+        - $ref: "#/components/parameters/orderlineNumber"
+      responses:
+        200:
+          $ref: "#/components/responses/OCARPurchaseOrders"
+    delete:
+      operationId: DELETE/ocarpurchaseorders/{orderNumber}/{orderlineNumber}
+      parameters:
+        - $ref: "#/components/parameters/orderNumber"
+        - $ref: "#/components/parameters/orderlineNumber"
+      responses:
+        200:
+          $ref: "#/components/responses/OCARPurchaseOrders"
+  /ocarcustomerorders:
+    post:
+      operationId: POST/ocarcustomerorders
+      requestBody:
+        $ref: "#/components/requestBodies/OCARCustomerOrder"
+      responses:
+        200:
+          $ref: "#/components/responses/OCARCustomerOrders"
+    delete:
+      operationId: DELETE/ocarcustomerorders
+      parameters:
+        - $ref: "#/components/parameters/days"
+      responses:
+        200:
+          $ref: "#/components/responses/OCARCustomerOrders"
+  /ocarcustomerorders/{orderNumber}:
+    get:
+      operationId: GET/ocarcustomerorders/{orderNumber}
+      parameters:
+        - $ref: "#/components/parameters/orderNumber"
+        - $ref: "#/components/parameters/messageNumber"
+        - $ref: "#/components/parameters/deliveryNumber"
+      responses:
+        200:
+          $ref: "#/components/responses/OCARCustomerOrders"
+    put:
+      operationId: PUT/ocarcustomerorders/{orderNumber}
+      parameters:
+        - $ref: "#/components/parameters/orderNumber"
+        - $ref: "#/components/parameters/messageNumber"
+        - $ref: "#/components/parameters/deliveryNumber"
+      requestBody:
+        $ref: "#/components/requestBodies/OCARCustomerOrder"
+      responses:
+        200:
+          $ref: "#/components/responses/OCARCustomerOrders"
+    delete:
+      operationId: GET/ocarcustomerorders/{orderNumber}
+      parameters:
+        - $ref: "#/components/parameters/orderNumber"
+        - $ref: "#/components/parameters/messageNumber"
+        - $ref: "#/components/parameters/deliveryNumber"
+      responses:
+        200:
+          $ref: "#/components/responses/OCARCustomerOrders"
+components:
+  securitySchemes:
+    basic:
+      type: http
+      scheme: basic
+  parameters:
+    orderNumber:
+      name: orderNumber
+      in: path
+      required: true
+      schema:
+        $ref: "#/components/schemas/orderNumber"
+    orderlineNumber:
+      name: orderlineNumber
+      in: path
+      required: true
+      schema:
+        $ref: "#/components/schemas/orderlineNumber"
+    customerNumber:
+      name: customerNumber
+      in: query
+      schema:
+        $ref: "#/components/schemas/customerNumber"
+    deliveryNumber:
+      name: deliveryNumber
+      in: query
+      schema:
+        $ref: "#/components/schemas/deliveryNumber"
+    messageNumber:
+      name: messageNumber
+      in: query
+      schema:
+        $ref: "#/components/schemas/messageNumber"
+    days:
+      name: days
+      in: query
+      schema:
+        $ref: "#/components/schemas/days"
+  requestBodies:
+    OCARPurchaseOrder:
+      description: OCARPurchaseOrder
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/OCARPurchaseOrder"
+    OCARCustomerOrder:
+      description: OCARCustomerOrder
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/OCARCustomerOrder"
+  responses:
+    OCARPurchaseOrders:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/OCARPurchaseOrders"
+    OCARCustomerOrders:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/OCARCustomerOrders"
+  schemas:
+    orderNumber:
+      type: string
+      example: "1012660"
+    orderlineNumber:
+      type: string
+      example: "10"
+    customerNumber:
+      type: string
+    deliveryNumber:
+      type: string
+    messageNumber:
+      type: string
+    days:
+      type: integer
+      minimum: 0
+    OCARPurchaseOrders:
+      type: object
+    OCARCustomerOrders:
+      type: object
+    OCARPurchaseOrder:
+      type: object
+      properties:
+        PurchaseOrder:
+          type: array
+          items:
+            $ref: "#/components/schemas/PurchaseOrderline"
+    OCARCustomerOrder:
+      type: object
+      properties:
+        CustomerOrder:
+          type: array
+          items:
+            $ref: "#/components/schemas/CustomerOrder"
+    PurchaseOrderline:
+      type: object
+      example:
+        $ref: "#/components/examples/PurchaseOrderline"
+    CustomerOrder:
+      type: object
+      properties:
+        COBlockCode:
+          type: string
+          example: "9"
+        CustomerOrderNumber:
+          $ref: "#/components/schemas/orderNumber"
+        CustomerNumber:
+          $ref: "#/components/schemas/customerNumber"
+        DeliveryNumber:
+          $ref: "#/components/schemas/deliveryNumber"
+        MessageNumber:
+          $ref: "#/components/schemas/messageNumber"
+        OrderDate:
+          type: string
+        OrderAmount:
+          type: string
+        Facility:
+          type: string
+        FreightType:
+          type: string
+          example: CIF
+        SalesPerson:
+          type: string
+        DeliveryAddresses:
+          type: array
+          items:
+            $ref: "#/components/schemas/DeliveryAddress"
+        OrderLines:
+          $ref: "#/components/schemas/CustomerOrderlines"
+    CustomerOrderlines:
+      type: array
+      items:
+        $ref: "#/components/schemas/CustomerOrderline"
+    CustomerOrderline:
+      type: object
+      example:
+        $ref: "#/components/examples/CustomerOrderline"
+    DeliveryAddress:
+      type: object
+      example:
+        $ref: "#/components/examples/DeliveryAddress"
+  examples:
+    PurchaseOrderline:
+      PurchaseOrderNumber: "1012660"
+      PurchaseOrderLineNumber: "10"
+      PurchaseOrderNumberLineNumber: "1012660/10"
+      CityCode: "48500"
+      ConversionFactor: "."
+      RemainQuantity: "0.000000"
+      PostalCode: "11010-121"
+      City: "Santos"
+      SupplierNumber: "168186"
+      TelephoneNumber: "+55 2138617013"
+      SupplierAddressLine1: "Rua General Camara"
+      Neighborhood: "Centro"
+      UoM: "KG"
+      ItemNumber: "10087450"
+      ReceivedQuantity: "1000.000"
+      TotalQuantity: "1000.000"
+      SupplierName: "Salinor - Salinas Do Nordeste S.A"
+      PurchaseOrderDate: "2018-06-12T00:00:00"
+      State: "SP"
+      ItemName: "Salt Feed Grade"
+      RequestedDeliveryDate: "2018-06-29T23:59:00"
+      Facility: "54A"
+    CustomerOrderline:
+      OrderLineNumber: "1"
+      ItemNumber: "11871235"
+      StockStatus: "22"
+      GroupTechnologyDescription: null
+      Quantity: "2000.000000"
+      RequestedDeliveryDate: "20180219"
+      NetWeight: "1.000"
+      AddressId: "540002"
+      GroupTechnology: null
+      ItemDescription: "Fri Ovo (F) 20kg"
+      PackSize: "20"
+    DeliveryAddress:
+      CityCode: "06102"
+      UF: "SP"
+      ZipCode: "14701-690"
+      Co-driver: "N"
+      Country: "BR"
+      DeliveryAddressLine2: "Jd Cruzeiro"
+      DeliveryAddressLine1: "Avenida Jose Cutrale Junior"
+      City: "Bebedouro"
+      AddressId: "540002"
