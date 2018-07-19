@@ -6,7 +6,7 @@ info:
     name: Nutreco
 servers:
   - description: development
-    url: https://api.nutreco.com/dev/firebase/dev/v1
+    url: https://api.nutreco.com/dev/v1
 security:
   basic: []
 paths:
