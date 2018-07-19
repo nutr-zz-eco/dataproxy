@@ -8,7 +8,7 @@ servers:
   - description: development
     url: https://api.nutreco.com/dev/v1
 security:
-  basic: []
+  - basic: []
 paths:
   /ocarpurchaseorders:
     post:
