@@ -39,6 +39,8 @@ paths:
       parameters:
         - $ref: "#/components/parameters/orderNumber"
         - $ref: "#/components/parameters/orderlineNumber"
+      requestBody:
+          $ref: "#/components/requestBodies/OCARPurchaseOrder"
       responses:
         200:
           $ref: "#/components/responses/OCARPurchaseOrders"
