@@ -52,7 +52,7 @@ paths:
       responses:
         200:
           $ref: "#/components/responses/OCARPurchaseOrders"
-  /ocarcustomerorders:
+  /ocarcustumerorders:
     post:
       operationId: POST/ocarcustomerorders
       requestBody:
@@ -67,7 +67,7 @@ paths:
       responses:
         200:
           $ref: "#/components/responses/OCARCustomerOrders"
-  /ocarcustomerorders/{orderNumber}:
+  /ocarcustumerorders/{orderNumber}:
     get:
       operationId: GET/ocarcustomerorders/{orderNumber}
       parameters:
