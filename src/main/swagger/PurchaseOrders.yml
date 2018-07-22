@@ -116,23 +116,26 @@ components:
       schema:
         $ref: "#/components/schemas/orderlineNumber"
     customerNumber:
-      name: customerNumber
+      name: customernumber
       in: query
       schema:
         $ref: "#/components/schemas/customerNumber"
     deliveryNumber:
-      name: deliveryNumber
+      name: deliverynumber
       in: query
+      required: true
       schema:
         $ref: "#/components/schemas/deliveryNumber"
     messageNumber:
-      name: messageNumber
+      name: messagenumber
       in: query
+      required: true
       schema:
         $ref: "#/components/schemas/messageNumber"
     days:
       name: days
       in: query
+      required: true
       schema:
         $ref: "#/components/schemas/days"
   requestBodies:
@@ -170,13 +173,16 @@ components:
       example: "10"
     customerNumber:
       type: string
+      example: "161751"
     deliveryNumber:
       type: string
+      example: "10345275"
     messageNumber:
       type: string
+      example: "0000000371"
     days:
       type: integer
-      minimum: 0
+      example: 0
     OCARPurchaseOrders:
       type: object
     OCARCustomerOrders:
@@ -215,15 +221,19 @@ components:
           $ref: "#/components/schemas/messageNumber"
         OrderDate:
           type: string
+          example: "20180629"
         OrderAmount:
           type: string
+          example: "1067.00"
         Facility:
           type: string
+          example: "540"
         FreightType:
           type: string
           example: CIF
         SalesPerson:
           type: string
+          example: John Doe
         DeliveryAddresses:
           type: array
           items:
