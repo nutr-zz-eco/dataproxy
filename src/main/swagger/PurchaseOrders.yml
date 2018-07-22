@@ -35,7 +35,7 @@ paths:
         200:
           $ref: "#/components/responses/OCARPurchaseOrders"
     put:
-      operationId: GET/ocarpurchaseorders/{orderNumber}/{orderlineNumber}
+      operationId: PUT/ocarpurchaseorders/{orderNumber}/{orderlineNumber}
       parameters:
         - $ref: "#/components/parameters/orderNumber"
         - $ref: "#/components/parameters/orderlineNumber"
