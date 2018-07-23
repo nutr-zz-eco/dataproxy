@@ -7,6 +7,10 @@ info:
 servers:
   - description: development
     url: https://api.nutreco.com/dev/v1
+  - description: testing
+    url: https://api.nutreco.com/test/v1
+  - description: production
+    url: https://api.nutreco.com/v1
 security:
   - basic: []
 paths:
