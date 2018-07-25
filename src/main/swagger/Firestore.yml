@@ -60,7 +60,7 @@ paths:
         200:
           $ref: "#/components/responses/PurchaseOrder"
     delete:
-      operationId: DELETE/purchaseorders/{uuid}
+      operationId: DELETE/purchaseorders/{orderNumber}
       parameters:
         - $ref: "#/components/parameters/orderNumber"
       responses:
@@ -325,7 +325,6 @@ components:
       type: string
     days:
       type: integer
-      minimum: 0
     PurchaseOrders:
       type: object
       properties:
