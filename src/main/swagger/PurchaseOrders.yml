@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: Firestore
+  title: PurchaseOrders
   version: 1.0.0
   contact:
     name: Nutreco
@@ -18,7 +18,7 @@ paths:
     post:
       operationId: POST/ocarpurchaseorders
       requestBody:
-          $ref: "#/components/requestBodies/OCARPurchaseOrder"
+        $ref: "#/components/requestBodies/OCARPurchaseOrder"
       responses:
         200:
           $ref: "#/components/responses/OCARPurchaseOrders"
