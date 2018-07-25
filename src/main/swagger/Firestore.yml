@@ -7,6 +7,10 @@ info:
 servers:
   - description: development
     url: https://api.nutreco.com/dev/firebase
+  - description: testing
+    url: https://api.nutreco.com/test/v1/firebase
+  - description: production
+    url: https://api.nutreco.com/v1/firebase
 security:
   - oauth: [admin]
 paths:
