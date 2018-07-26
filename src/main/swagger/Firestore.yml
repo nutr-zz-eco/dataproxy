@@ -5,19 +5,19 @@ info:
   contact:
     name: Nutreco
 servers:
-  - description: development
-    url: https://api.nutreco.com/dev/firebase
-  - description: testing
-    url: https://api.nutreco.com/test/v1/firebase
-  - description: production
-    url: https://api.nutreco.com/v1/firebase
+  - description: NUT
+    url: https://nutreco-dev.apigee.net/firebase
+  - description: NUA
+    url: https://nutreco-test.apigee.net/firebase
+  - description: NUP
+    url: https://nutreco-prod.apigee.net/firebase
 security:
   - oauth: [admin]
 paths:
   /token:
     post:
       security:
-        - apikey: []
+        - basic: []
       operationId: POST/token
       responses:
         200:
@@ -305,10 +305,9 @@ components:
           schema:
             $ref: "#/components/schemas/CustomerOrderline"
   securitySchemes:
-    apikey:
-      type: apiKey
-      in: header
-      name: apikey
+    basic:
+      type: http
+      scheme: basic
     oauth:
       type: oauth2
       flows:
