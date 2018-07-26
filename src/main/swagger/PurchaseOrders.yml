@@ -38,6 +38,8 @@ paths:
       responses:
         200:
           $ref: "#/components/responses/OCARPurchaseOrders"
+        404:
+          $ref: "#/component/responses/FirebaseError"
     put:
       operationId: PUT/ocarpurchaseorders/{orderNumber}/{orderlineNumber}
       parameters:
@@ -81,6 +83,8 @@ paths:
       responses:
         200:
           $ref: "#/components/responses/OCARCustomerOrders"
+        404:
+          $ref: "#/component/responses/FirebaseError"
     put:
       operationId: PUT/ocarcustomerorders/{orderNumber}
       parameters:
@@ -168,6 +172,11 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/OCARCustomerOrders"
+    FirebaseError:
+      description: Not Found
+      content:
+        application/json:
+          schema: "#/components/schemas/FirebaseError"
   schemas:
     orderNumber:
       type: string
@@ -256,6 +265,19 @@ components:
       type: object
       example:
         $ref: "#/components/examples/DeliveryAddress"
+    FirebaseError:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: integer
+              enum: [404, 409]
+            message:
+              type: string
+            status:
+              type: string
   examples:
     PurchaseOrderline:
       PurchaseOrderNumber: "1012660"
