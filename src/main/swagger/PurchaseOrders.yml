@@ -97,7 +97,7 @@ paths:
         200:
           $ref: "#/components/responses/OCARCustomerOrders"
     delete:
-      operationId: GET/ocarcustomerorders/{orderNumber}
+      operationId: DELETE/ocarcustomerorders/{orderNumber}
       parameters:
         - $ref: "#/components/parameters/orderNumber"
         - $ref: "#/components/parameters/messageNumber"
