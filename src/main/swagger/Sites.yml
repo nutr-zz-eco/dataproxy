@@ -1,0 +1,69 @@
+openapi: 3.0.0
+info:
+  title: PurchaseOrders
+  version: 1.0.0
+  contact:
+    name: Nutreco
+servers:
+  - description: development
+    url: https://api.nutreco.com/dev/v1
+  - description: testing
+    url: https://api.nutreco.com/test/v1
+  - description: production
+    url: https://api.nutreco.com/v1
+security:
+  - basic: []
+paths:
+  /sites/{facilityId}/customerorders:
+    get:
+      operationId: GET/sites/{facilityId}/customerorders
+      parameters:
+        - $ref: "#/components/parameters/facilityId"
+      responses:
+        200:
+          $ref: "#/components/responses/OCARCustomerOrdersArray"
+  /sites/{facilityId}/purchaseorders:
+    get:
+      operationId: GET/sites/{facilityId}/purchaseorders
+      parameters:
+        - $ref: "#/components/parameters/facilityId"
+      responses:
+        200:
+          $ref: "#/components/responses/OCARPurchaseOrdersArray"
+components:
+  securitySchemes:
+    basic:
+      $ref: securitySchemes/basic.yml
+  parameters:
+    facilityId:
+      name: facilityId
+      in: path
+      required: true
+      schema:
+        $ref: "#/components/schemas/facilityId"
+  responses:
+    OCARCustomerOrdersArray:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/OCARCustomerOrdersArray"
+    OCARPurchaseOrdersArray:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/OCARPurchaseOrdersArray"
+  schemas:
+    OCARCustomerOrdersArray:
+      type: array
+      items:
+        $ref: "#/components/schemas/OCARCustomerOrder"
+    OCARPurchaseOrdersArray:
+      type: array
+      items:
+        $ref: "#/components/schemas/OCARPurchaseOrder"
+    OCARCustomerOrder:
+      $ref: schemas/OCARCustomerOrder.yml
+    OCARPurchaseOrder:
+      $ref: schemas/PurchaseOrderline.yml

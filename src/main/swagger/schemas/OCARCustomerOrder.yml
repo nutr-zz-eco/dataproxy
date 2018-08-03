@@ -1,0 +1,37 @@
+---
+type: object
+properties:
+  COBlockCode:
+    type: string
+    example: "9"
+  CustomerOrderNumber:
+    $ref: orderNumber.yml
+  CustomerNumber:
+    $ref: customerNumber.yml
+  DeliveryNumber:
+    $ref: deliveryNumber.yml
+  MessageNumber:
+    $ref: messageNumber.yml
+  OrderDate:
+    type: string
+    example: "20180629"
+  OrderAmount:
+    type: string
+    example: "1067.00"
+  Facility:
+    type: string
+    example: "540"
+  FreightType:
+    type: string
+    example: CIF
+  SalesPerson:
+    type: string
+    example: John Doe
+  DeliveryAddresses:
+    type: array
+    items:
+      $ref: DeliveryAddress.yml
+  OrderLines:
+    type: array
+    items:
+      $ref: "#/components/schemas/CustomerOrderline"

@@ -1,0 +1,4 @@
+---
+type: object
+example:
+  $ref: ../examples/PurchaseOrderline.yml
