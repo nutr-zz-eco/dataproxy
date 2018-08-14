@@ -14,19 +14,68 @@ servers:
 security:
   - basic: []
 paths:
-  /sites/{facilityId}/customerorders:
+  /sites/{siteId}/customerorders:
     get:
-      operationId: GET/sites/{facilityId}/customerorders
+      operationId: GET/sites/{siteId}/customerorders
       parameters:
-        - $ref: "#/components/parameters/facilityId"
+        - $ref: "#/components/parameters/siteId"
+        - $ref: "#/components/parameters/queryOrderNumber"
+        - $ref: "#/compoennts/parameters/queryDeliveryNumber"
+        - $ref: "#/components/parameters/queryStartDate"
+        - $ref: "#/components/parameters/queryEndDate"
+        - $ref: "#/components/parameters/queryFreightType"
+        - $ref: "#/components/parameters/offset"
+        - $ref: "#/components/parameters/limit"
       responses:
         200:
           $ref: "#/components/responses/OCARCustomerOrdersArray"
-  /sites/{facilityId}/purchaseorders:
+  /sites/{siteId}/customerorders/{deliveryNumber}:
     get:
-      operationId: GET/sites/{facilityId}/purchaseorders
+      operationId: GET/sites/{siteId}/customerorders/{deliveryNumber}
       parameters:
-        - $ref: "#/components/parameters/facilityId"
+        - $ref: "#/components/parameters/siteId"
+        - $ref: "#/components/parameters/deliveryNumber"
+      responses:
+        200:
+          $ref: "#/components/responses/OCARCustomerOrdersArray"
+  /sites/{siteId}/customerorders/{orderNumber}/{deliveryNumber}:
+    get:
+      operationId: GET/sites/{siteId}/customerorders/{orderNumber}/{deliveryNumber}
+      parameters:
+        - $ref: "#/components/parameters/siteId"
+        - $ref: "#/components/parameters/orderNumber"
+        - $ref: "#/components/parameters/deliveryNumber"
+      responses:
+        200:
+          $ref: "#/components/responses/OCARCustomerOrdersArray"
+  /sites/{siteId}/customerorders/{startDate}/{endDate}/{freightType}:
+    get:
+      operationId: GET/sites/{siteId}/customerorders/{startDate}/{endDate}/{freightType}
+      parameters:
+        - $ref: "#/components/parameters/siteId"
+        - $ref: "#/components/parameters/startDate"
+        - $ref: "#/components/parameters/endDate"
+        - $ref: "#/components/parameters/freightType"
+      responses:
+        200:
+          $ref: "#/components/responses/OCARCustomerOrdersArray"
+  /sites/{siteId}/customerorders/{orderNumber}/{startDate}/{endDate}/{freightType}:
+    get:
+      operationId: GET/sites/{siteId}/customerorders/{orderNumber}/{startDate}/{endDate}/{freightType}
+      parameters:
+        - $ref: "#/components/parameters/siteId"
+        - $ref: "#/components/parameters/orderNumber"
+        - $ref: "#/components/parameters/startDate"
+        - $ref: "#/components/parameters/endDate"
+        - $ref: "#/components/parameters/freightType"
+      responses:
+        200:
+          $ref: "#/components/responses/OCARCustomerOrdersArray"
+  /sites/{siteId}/purchaseorders:
+    get:
+      operationId: GET/sites/{siteId}/purchaseorders
+      parameters:
+        - $ref: "#/components/parameters/siteId"
       responses:
         200:
           $ref: "#/components/responses/OCARPurchaseOrdersArray"
@@ -35,12 +84,84 @@ components:
     basic:
       $ref: securitySchemes/basic.yml
   parameters:
-    facilityId:
-      name: facilityId
+    siteId:
+      name: siteId
       in: path
       required: true
       schema:
-        $ref: "#/components/schemas/facilityId"
+        $ref: "#/components/schemas/siteId"
+    orderNumber:
+      name: orderNumber
+      in: path
+      required: true
+      schema:
+        $ref: "#/components/schemas/orderNumber"
+    queryOrderNumber:
+      name: orderNumber
+      in: path
+      required: false
+      schema:
+        $ref: "#/components/schemas/orderNumber"
+    deliveryNumber:
+      name: deliveryNumber
+      in: path
+      required: true
+      schema:
+        $ref: "#/components/schemas/deliveryNumber"
+    queryDeliveryNumber:
+      name: deliveryNumber
+      in: query
+      required: false
+      schema:
+        $ref: "#/components/schemas/deliveryNumber"
+    startDate:
+      name: startDate
+      in: path
+      required: true
+      schema:
+        $ref: "#/components/schemas/startDate"
+    queryStartDate:
+      name: startDate
+      in: query
+      required: false
+      schema:
+        $ref: "#/components/schemas/startDate"
+    endDate:
+      name: endDate
+      in: path:
+      required: true
+      schema:
+        $ref: "#/components/schemas/endDate"
+    queryEndDate:
+      name: endDate
+      in: query
+      required: false
+      schema:
+        $ref: "#/components/schemas/endDate"
+    freightType:
+      name: freightType
+      in: path
+      required: true
+      schema:
+        $ref: "#/components/schemas/freightType"
+    queryFreightType:
+      name: freightType
+      in: query
+      required: false
+      schema:
+        $ref: "#/components/schemas/freightType"
+    limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        $ref: "#/components/schemas/limit"
+    offset:
+      name: offset
+      in: query
+      required: false
+      schema:
+        $ref: "#/components/schemas/offset"
   responses:
     OCARCustomerOrdersArray:
       description: OK
@@ -55,6 +176,23 @@ components:
           schema:
             $ref: "#/components/schemas/OCARPurchaseOrdersArray"
   schemas:
+    siteId:
+      type: string
+      enum: [540,542,544,546,548,54A,54C,54E,54G]
+    orderNumber:
+      type: string
+    deliveryNumber:
+      type: string
+    startDate:
+      type: string
+    endDate:
+      type: string
+    freightType:
+      type: string
+    limit:
+      type: integer
+    offset:
+      type: integer
     OCARCustomerOrdersArray:
       type: array
       items:

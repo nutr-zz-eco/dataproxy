@@ -123,8 +123,14 @@ paths:
     get:
       operationId: GET/customerorders
       parameters:
+        - $ref: "#/components/parameters/queryOrderNumber"
         - $ref: "#/components/parameters/deliveryNumber"
         - $ref: "#/components/parameters/messageNumber"
+        - $ref: "#/components/parameters/startDate"
+        - $ref: "#/components/parameters/endDate"
+        - $ref: "#/components/parameters/freightType"
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/offset"
         - $ref: "#/components/parameters/days"
       responses:
         200:
@@ -202,6 +208,12 @@ components:
       required: true
       schema:
         $ref: "#/components/schemas/orderNumber"
+    queryOrderNumber:
+      name: orderNumber
+      in: path
+      required: false
+      schema:
+        $ref: "#/components/schemas/orderNumber"
     orderlineNumber:
       name: orderlineNumber
       in: path
@@ -223,6 +235,36 @@ components:
       in: query
       schema:
         $ref: "#/components/schemas/messageNumber"
+    startDate:
+      name: startDate
+      in: query
+      required: false
+      schema:
+        $ref: "#/components/schemas/startDate"
+    endDate:
+      name: endDate
+      in: query
+      required: false
+      schema:
+        $ref: "#/components/schemas/endDate"
+    freightType:
+      name: freightType
+      in: query
+      required: false
+      schema:
+        $ref: "#/components/schemas/freightType"
+    limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        $ref: "#/components/schemas/limit"
+    offset:
+      name: offset
+      in: query
+      required: false
+      schema:
+        $ref: "#/components/schemas/offset"
     days:
       name: days
       in: query
@@ -326,6 +368,16 @@ components:
       type: string
     messageNumber:
       type: string
+    startDate:
+      type: string
+    endDate:
+      type: string
+    freightType:
+      type: string
+    limit:
+      type: integer
+    offset:
+      type: integer
     days:
       type: integer
     PurchaseOrders:
